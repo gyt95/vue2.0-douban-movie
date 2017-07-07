@@ -1,0 +1,149 @@
+<template>
+	<div class="my-results">
+		<ul>
+			<p v-if="type=='want'" class="record-sum">{{sum_want.length}}部</p>
+			<li v-for="item in want">
+				<router-link :to="{name:'details',params:{ id: item.id }}" class="enter">
+					<div class="movie-pic">
+						<img :src="item.images.small">
+					</div>
+					<div class="movie-info">
+						<h3>{{item.title}}</h3>
+						<p v-if="item.rating.average != 0">
+							<star :size="24" :score="item.rating.average" style="display: inline;"></star>
+							{{item.rating.average}}
+						</p>
+						<div class="movie-name">
+							<p>导演：{{item.directors[0].name}}</p>
+							<span class="casts">主演：
+								<span v-for="(cast,index) in item.casts">{{cast.name}}<span v-if="index < 2">/</span></span>
+							</span>
+						</div>
+					</div>
+				</router-link>
+			</li>
+		</ul>
+		<ul>
+			<p v-if="type=='ever'" class="record-sum">{{sum_ever.length}}部</p>
+			<li v-for="item in ever">
+				<router-link :to="{name:'details',params:{ id: item.id }}" class="enter">
+					<div class="movie-pic">
+						<img :src="item.images.small">
+					</div>
+					<div class="movie-info">
+						<h3>{{item.title}}</h3>
+						<p v-if="item.rating.average != 0">
+							<star :size="24" :score="item.rating.average" style="display: inline;"></star>
+							{{item.rating.average}}
+						</p>
+						<div class="movie-name">
+							<p>导演：{{item.directors[0].name}}</p>
+							<span class="casts">主演：
+								<span v-for="(cast,index) in item.casts">{{cast.name}}<span v-if="index < 2">/</span></span>
+							</span>
+						</div>
+					</div>
+				</router-link>
+			</li>
+		</ul>
+	</div>
+</template>
+<script>
+	import { fetch } from '@/config/utils'
+	import { mapState } from 'vuex'
+	import star from './star/star';
+	export default{
+		props:{
+			type:{
+				type:String
+			}
+		},
+		data(){
+			return{
+				want:[],
+				ever:[],
+				sum_want:[],
+				sum_ever:[]
+			}
+		},
+		computed:{
+			...mapState(['mySelected'])
+		},
+		components:{
+			star
+		},
+		created(){
+			this.sum_want = JSON.parse(fetch('wantTo'));
+			this.sum_ever = JSON.parse(fetch('ever'));
+			if(this.type == 'want'){
+				//记得要用JSON.parse，否则就是一堆无法显示的JSON格式的数据
+				this.want = JSON.parse(fetch('wantTo'))
+			}
+			if(this.type == 'ever'){
+				this.ever = JSON.parse(fetch('ever'))
+			}
+		}
+	}
+</script>
+<style lang="scss" rel="stylesheet/scss">
+	.my-results{
+		ul{
+			background: #F0F1EC;
+			.record-sum{
+				font-size: 0.6rem;
+				padding: 0.6rem;
+			}
+			li{
+				background:#fff;
+				list-style:none;
+			    text-decoration: none;
+			    color: #000;
+			    //width: 100%;
+				padding: 0.5rem;
+				border-bottom: 1px solid #f2f2f2;
+				.enter{
+					color:#000;
+					text-decoration:none;
+				    display: -webkit-box;
+				    display: -ms-flexbox;
+				    display: flex;
+					.movie-pic{
+						img{
+							width: 3rem;
+						    vertical-align: middle;
+						}
+				    }
+
+				    .movie-info{
+			    	    flex: 2;
+						padding: 0 0.6rem;
+						.casts{
+							display: block;
+		    				span{
+								display: inline;
+		    				}
+						}
+						h3{
+							font-size: 0.8rem;
+						}
+						p{
+						    display: block;
+						    padding-top: 0.4rem;
+						}
+						p,span{
+						    font-size: 0.55rem;
+						    color: grey;
+						}
+						.movie-name{
+							p{
+								padding-top: 0.4rem;
+							}
+						}
+				    }
+				}
+				    
+			}
+		}
+		
+	}
+</style>
