@@ -17,6 +17,62 @@ export const remove = name => {
     window.localStorage.removeItem(name);
 }
 
+export const test = () =>{
+    document.body.addEventListener('touchstart', function(e){
+        //e为TouchEvent，e.target就是所对应的DOM
+        //target.dataset.touch、  target.innerText、  target.classList等都是对DOM的属性的设置
+        var target = e.target;
+        if(target.dataset.touch === 'true'){
+            target.style.color='#fff';
+            if(target.innerText=='购票'){
+                // target.classList.remove('active-ing');
+                target.style.backgroundColor='red';
+            }else{
+                // target.classList.remove('active-will');
+                target.style.backgroundColor='orange';
+            }
+        }
+    });
+    document.body.addEventListener('touchmove', function(e){
+        var target = e.target,
+        rect = target.getBoundingClientRect();
+        if(target.dataset.touch === 'true'){
+            target.style.color='#fff';
+            // 移出元素时，取消active状态
+            if(e.changedTouches[0].pageX<rect.left || e.changedTouches[0].pageX>rect.right || e.changedTouches[0].pageY<rect.top || e.changedTouches[0].pageY>rect.bottom){
+                if(target.innerText=='购票'){
+                    target.style.backgroundColor='red';
+                }else{
+                    target.style.backgroundColor='orange';
+                }
+            }
+        }
+    });
+
+    document.body.addEventListener('touchcancel', function(e){
+        var target = e.target;
+        if(target.dataset.touch === 'true'){
+            target.style.color='#fff';
+            if(target.innerText=='购票'){
+                target.style.backgroundColor='red';
+            }else{
+                target.style.backgroundColor='orange';
+            }
+        }
+    });
+
+    document.body.addEventListener('touchend', function(e){
+        var target = e.target;
+        if(target.dataset.touch === 'true'){
+            target.style.color='';
+            if(target.innerText=='购票'){
+                target.style.backgroundColor='';
+            }else{
+                target.style.backgroundColor='';
+            }
+        }
+    });
+}
 /**
  * 显示返回顶部按钮，开始、结束、运动 三个过程中调用函数判断是否达到目标点
  */

@@ -23,7 +23,7 @@
 					<h3>出生地：</h3>
 					<span>{{actorInfo.born_place}}</span>
 				</span>
-				<span v-if="actorInfo.aka.length!=0">
+				<span v-if="actorInfo.aka!=null">
 					<h3>更多中文名：</h3>
 					<ul>
 						<li v-for="(items,index) in actorInfo.aka">
@@ -70,6 +70,9 @@
 			hide(){
 				this.infoShow = false;
 			}
+		},
+		created(){
+			console.log(4444)
 		}
 	}
 </script>

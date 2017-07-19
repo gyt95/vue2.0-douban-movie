@@ -44,10 +44,12 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="btn-box">
 					<button class="see1" :class="color" @click="record(details)">{{wanted}}</button>
-					<button :class="color2" @click="record2(details)">看过</button>
+					<button :class="color2" @click="record2(details)">{{seen}}</button>
 				</div>
+
 				<div class="ticket-part">
 					<!-- <router-link> -->
 						<h3>选座购票</h3>
@@ -56,10 +58,12 @@
 							</span>
 					<!-- </router-link> -->
 				</div>
+
 				<div class="info-part">
 					<p>简介</p>
 					<span @click="summaryShow" ref="summary">{{details.summary}}</span>
 				</div>
+
 				<div class="actors-part">
 					<p>影人</p>
 					<ul>
@@ -71,6 +75,7 @@
 						</li>
 					</ul>
 				</div>
+
 				<div class="comments-part">
 					<p>短评</p>
 					<ul>
@@ -111,6 +116,7 @@
 						</li>
 					</ul>
 				</div>
+
 				<div class="btn-part" @click="checkReviews">
 					<button>全部影评{{ details.reviews_count }}个</button>
 				</div>
@@ -147,7 +153,8 @@
 				single2:{},
 				color:'',
 				color2:'',
-				wanted:'想看'
+				wanted:'想看',
+				seen:'看过'
 			}
 		},
 		computed:{
@@ -160,11 +167,17 @@
 			this.$store.dispatch('detailsAsync',this.id)
 			for(let i=0;i<this.wantTo.length;i++){
 				if(this.wantTo[i].id==this.id && fetch('userInfo')){
-					this.color='clicked'
+					this.color='clicked';
+					this.wanted="已想看";
 					console.log(this.color)
 				}
 			}
-			
+			for(let i=0;i<this.ever.length;i++){
+				if(this.ever[i].id==this.id && fetch('userInfo')){
+					this.color2='clicked';
+					this.seen="已看过";
+				}
+			}
 		},
 		mounted(){  //实时调用methods的方法
 			this.initData();
@@ -247,16 +260,16 @@
 						this.ever.forEach((item,index)=>{
 							if(item.id==this.single2.id){
 								checkRepeat = true;
-								this.color = '';
-								this.wanted = '看过';
+								this.color2 = '';
+								this.seen = '看过';
 								console.log('取消收藏');
 								this.ever.splice(index,1);
 								save('ever',this.ever)
 							}
 						})
 						if(!checkRepeat){
-							this.color = 'clicked';
-							this.wanted = '已看过';
+							this.color2 = 'clicked';
+							this.seen = '已看过';
 							this.ever.push(this.single2);
 							save('ever',this.ever);
 							console.log('收藏成功！')
@@ -265,8 +278,8 @@
 						if(this.ever==null){
 							this.ever=[]
 						}
-						this.color = 'clicked';
-						this.wanted = '已看过';
+						this.color2 = 'clicked';
+						this.seen = '已看过';
 						this.ever.push(this.single2);
 						save('ever',this.ever);
 					}

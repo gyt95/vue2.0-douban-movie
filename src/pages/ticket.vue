@@ -4,7 +4,7 @@
 			<img src="../assets/登录返回.png" alt="" class="back" @click="back">
 			<h3>我的电影票</h3>
 		</div>
-		<div class="ticket-main" v-show="!isLoading">
+		<div class="ticket-main">
 			<div class="tips">
 				<p>你还没有购买过电影票</p>
 				<span>在线选座，随时购买，无需排队</span>

@@ -23,12 +23,12 @@
 				<div class="ticketBuy">
 					<div v-if="type == 'ingMovie'">
 						<router-link to="/home">
-							<button>购票</button>
+							<button data-touch="true">购票</button>
 						</router-link>
 					</div>
 					<div v-if="type == 'willMovie'">
 						<router-link to="/home">
-							<button class="wantTo">预售</button>
+							<button class="wantTo" data-touch="true">预售</button>
 						</router-link>
 					</div>
 				</div>	
@@ -39,7 +39,7 @@
 <script>
 	import { mapState } from 'vuex';
 	import star from './star/star';
-	import { fetch,save } from '@/config/utils'
+	import { fetch,save,test } from '@/config/utils'
 	export default{
 		props:{ //父级传递数据，那边:type="slide"，这边用props来接收
 			type:{
@@ -79,9 +79,13 @@
 			
 		},
 		mounted(){
+			this.initData();
 			window.addEventListener('scroll',this.initScroll);
 		},
 		methods:{
+			initData(){
+				test();
+			},
 			initScroll(){
 				this.scroll = document.body.scrollTop;
 				if(this.scroll > 170){
@@ -117,5 +121,12 @@
 	  	height: 100vh;
 	  	overflow: auto;
 	  	-webkit-overflow-scrolling: touch;
+	}
+
+	.active-will{
+		background:yellow;
+	}
+	.active-ing{
+		background:red;
 	}
 </style>

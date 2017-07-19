@@ -1,8 +1,8 @@
 <template>
 	<div class="my-results">
-		<ul>
+		<!-- <ul>
 			<p v-if="type=='want'" class="record-sum">{{sum_want.length}}部</p>
-			<li v-for="item in want">
+			<li v-if="sum_want.length>0" v-for="item in want">
 				<router-link :to="{name:'details',params:{ id: item.id }}" class="enter">
 					<div class="movie-pic">
 						<img :src="item.images.small">
@@ -22,10 +22,43 @@
 					</div>
 				</router-link>
 			</li>
-		</ul>
+			<span v-if="sum_want.length==0">啥也没有</span>
+		</ul> -->
 		<ul>
 			<p v-if="type=='ever'" class="record-sum">{{sum_ever.length}}部</p>
-			<li v-for="item in ever">
+			<p v-if="type=='want'" class="record-sum">{{sum_want.length}}部</p>
+
+			<div class="no-movie" v-if="type=='want'&&sum_want.length==0">
+				<img src="../assets/no-movie.png" alt="">
+				<span>{{tips}}</span>
+			</div>
+			<div class="no-movie" v-if="type=='ever'&&sum_ever.length==0">
+				<img src="../assets/no-movie.png" alt="">
+				<span>{{tips}}</span>
+			</div>
+
+			<li v-if="type=='ever'" v-for="item in ever">
+				<router-link :to="{name:'details',params:{ id: item.id }}" class="enter">
+					<div class="movie-pic">
+						<img :src="item.images.small">
+					</div>
+					<div class="movie-info">
+						<h3>{{item.title}}</h3>
+						<p v-if="item.rating.average != 0">
+							<star :size="24" :score="item.rating.average" style="display: inline;"></star>
+							{{item.rating.average}}
+						</p>
+						<div class="movie-name">
+							<p>导演：{{item.directors[0].name}}</p>
+							<span class="casts">主演：
+								<span v-for="(cast,index) in item.casts">{{cast.name}}<span v-if="index < 2">/</span></span>
+							</span>
+						</div>
+					</div>
+				</router-link>
+			</li>
+
+			<li v-if="type=='want'&&sum_want!=null" v-for="item in want">
 				<router-link :to="{name:'details',params:{ id: item.id }}" class="enter">
 					<div class="movie-pic">
 						<img :src="item.images.small">
@@ -60,6 +93,7 @@
 		},
 		data(){
 			return{
+				tips:'你还没有标记相关内容',
 				want:[],
 				ever:[],
 				sum_want:[],
@@ -93,6 +127,19 @@
 				font-size: 0.6rem;
 				padding: 0.6rem;
 			}
+			.no-movie{
+				position: absolute;
+			    top: 30%;
+			    left: 50%;
+			    transform: translate(-50%,-50%);
+			    width: 10rem;
+			    text-align: center;
+		        font-size: 0.8rem;
+			    img{
+			    	width: 10rem;
+			    }
+			}
+
 			li{
 				background:#fff;
 				list-style:none;
@@ -146,4 +193,5 @@
 		}
 		
 	}
+
 </style>

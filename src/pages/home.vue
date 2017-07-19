@@ -64,7 +64,7 @@
 	import { swiperPlugins } from 'vue-awesome-swiper'
 
 	import { mapState } from 'vuex'
-	import { showBack, animate } from '@/config/utils'
+	import { test } from '@/config/utils'
 	const TAB_NAME = ['正在热映', '即将上映']
 
 	export default{
