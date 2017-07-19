@@ -3,7 +3,7 @@
 > 本人做的第一个真正意义上的Vue开源项目。学了1个多月的Vue，从看官方文档到试写demo，本想把demo当小项目却被同学诟病没有主题，想了想觉得挺有道理，就去找主题，最后决定用Vue仿豆瓣电影写一个web app。
 
 ## 项目地址
-[demo](https://github.com/gyt95/vue2-douban-movie)
+[demo](https://github.com/gyt95/vue2.0-douban-movie)
 
 ## 技术栈
 
@@ -12,9 +12,9 @@ vue2 + vue-router + vuex + axios + ES6 + scss + flex
 ## 项目运行
 
 ``` 
-git clone git@github.com:gyt95/vue2-douban-movie.git
+git clone git@github.com:gyt95/vue2.0-douban-movie.git
 
-cd vue2-douban-movie
+cd vue2.0-douban-movie
 
 npm install
 
@@ -61,22 +61,22 @@ npm run dev
 
 ## 项目部分截图
 ### 首页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/index.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/index.gif" width="365" height="619"/>
 
 ### 电影详情页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/details.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/details.gif" width="365" height="619"/>
 
 ### 影人详情页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/actors.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/actors.gif" width="365" height="619"/>
 
 ### 榜单页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/board.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/board.gif" width="365" height="619"/>
 
 ### 登录页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/login.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/login.gif" width="365" height="619"/>
 
 ### 登出页、查看电影票页
-<img src="https://github.com/gyt95/vue2-douban-movie/blob/master/screen/logOut&myTicket.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/logOut&myTicket.gif" width="365" height="619"/>
 
 ## 感谢
 感谢两个开源项目[elm](https://github.com/liangxiaojuan/eleme)和[vue2-elm](https://github.com/bailicangdu/vue2-elm)，对我本次项目开发有很大帮助。     
