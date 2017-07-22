@@ -20,8 +20,8 @@
 						<p ref="movieName">{{actors.name_en}}</p>
 					</div>
 				</div>
+				<p class="works-title">个人简介</p>
 				<div class="info-part">
-					<p>个人简介</p>
 					<span @click="showInfo(actors)" v-if="actors.summary != ''">
 						{{actors.summary}}
 					</span>
@@ -44,8 +44,8 @@
 						</span>
 					</div>
 				</div>
+				<p class="works-title">代表作品</p>
 				<div class="movies-part">
-					<p>代表作品</p>
 					<ul>
 						<li v-for="items in actors.works">
 							<router-link :to="{name:'details',params:{ id:items.subject.id }}">
@@ -173,7 +173,8 @@
 	.detail-content{
 	    position: absolute;
     	top: 13.8rem;
-	    padding: 0 0.4rem;
+	    //padding: 0 0.4rem;
+	    width:100%;
 
     	.main-part{
 		    display: flex;
@@ -246,17 +247,20 @@
 			    }
 		    }
 		}
+	
+		.works-title{
+			color:grey;
+		    font-size: 0.6rem;
+		    padding: 0.6rem 0.8rem 0;
+		}
 
 		.movies-part{
 		    padding: 0.6rem 0.8rem;
-			p{
-	    	    font-size: 0.6rem;
-				color: grey;
-		    }
+	        overflow: hidden;
+    		overflow-x: auto;
 			ul{
-			    
-			    height: 5.3rem;
-			    width: 100%;
+		        height: 7.3rem;
+    			width: 410px;
 				li {
 				    display: inline-block;
 				    margin: 0 0.05rem 0;
@@ -271,6 +275,7 @@
 						    width: 3rem;
 						    margin-right: 0.3rem;
 					        text-align: center;
+					        color: grey;
 						}
 						img{
 							width: 3rem;

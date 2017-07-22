@@ -3,6 +3,9 @@
 		<div class="loading" v-show="isLoading"></div>
 		<ul>
 			<li class="movie-wrapper" v-for="(item,index) in datas">
+				<!-- <div v-if="type=='willMovie'">
+					<span>{{item.mainland_pubdate}}</span>
+				</div> -->
 				<router-link class="movie-route" :to="{name:'details',params:{ id: item.id }}">
 					<div class="movie-pic">
 						<img :src="item.images.medium">
@@ -22,14 +25,14 @@
 				</router-link>
 				<div class="ticketBuy">
 					<div v-if="type == 'ingMovie'">
-						<router-link to="/home">
-							<button data-touch="true">购票</button>
-						</router-link>
+						<!-- <router-link to="/home"> -->
+							<button data-touch="true" @click="jump(item.id)">购票</button>
+						<!-- </router-link> -->
 					</div>
 					<div v-if="type == 'willMovie'">
-						<router-link to="/home">
-							<button class="wantTo" data-touch="true">预售</button>
-						</router-link>
+						<!-- <router-link to="/home"> -->
+							<button class="wantTo" data-touch="true" @click="jump(item.id)">预售</button>
+						<!-- </router-link> -->
 					</div>
 				</div>	
 			</li>
@@ -92,6 +95,13 @@
 					this.test = 'test'
 				}else{
 					this.test = 'results';
+				}
+			},
+			jump(id){
+				if(!fetch('userInfo')){
+					this.$router.push('/login');
+				}else{
+					this.$router.push('/chooseCinema/'+id);
 				}
 			}
 		}

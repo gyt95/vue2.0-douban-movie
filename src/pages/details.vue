@@ -350,14 +350,14 @@
 	.detail-content{
 	    position: absolute;
     	top: 13.8rem;
-	    padding: 0 0.4rem;
+	    //padding: 0 0.4rem;
 
     	.main-part{
 		    display: flex;
     		justify-content: center;
 
     		.left-box{
-    		    flex: 1;
+    		    flex: 1.5;
     			margin-left: 0.8rem;
     			h3{
 				    font-size: 1rem;
@@ -371,7 +371,7 @@
     			flex: 1;
     			text-align: center;
     			.score{
-				    margin: 0.8rem 1rem 0.3rem 2.8rem;
+				    margin: 0.8rem 1rem 0.3rem 1.8rem;
     				box-shadow: -0.1px 0.5px 2px 0.5px lightgrey;
     			}
     			p{
@@ -522,7 +522,7 @@
 				color: #333;
 				text-decoration: none;
 			}
-		    padding: 0.6rem 0.8rem 0;
+		    padding: 0.6rem 1rem 0;
 			p{
 			    font-size: 0.6rem;
 			    color: grey;

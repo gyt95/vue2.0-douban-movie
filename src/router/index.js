@@ -11,6 +11,8 @@ import actors from '@/pages/actors'
 import billboard from '@/pages/billboard'
 import reviews from '@/pages/reviews'
 import ticket from '@/pages/ticket'
+import chooseCinema from '@/pages/chooseCinema'
+import chooseEvent from '@/pages/chooseEvent'
 
 Vue.use(Router)
 
@@ -70,6 +72,16 @@ export default new Router({
       path: '/ticket',
       name: 'ticket',
       component: ticket
+    },
+    {
+      path: '/chooseCinema/:id',
+      name: 'chooseCinema',
+      component: chooseCinema
+    },
+    {
+      path: '/chooseEvent/:id',
+      name: 'chooseEvent',
+      component: chooseEvent
     }
   ]
-})
+});
