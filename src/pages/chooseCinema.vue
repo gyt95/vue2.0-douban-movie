@@ -21,7 +21,7 @@
 			<h3>上映此片的全部影院</h3>
 			<ul>
 				<li>
-					<router-link to="/home">
+					<router-link :to="{name:'order',params:{id:this.id}}">
 						<p>橙天嘉禾广州影城</p>
 						<span>44.5元起</span>
 						<div class="info">
@@ -99,7 +99,7 @@
 	export default{
 		datas(){
 			return{
-				
+				id:''
 			}
 		},
 		created(){

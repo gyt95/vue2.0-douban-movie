@@ -13,6 +13,7 @@ import reviews from '@/pages/reviews'
 import ticket from '@/pages/ticket'
 import chooseCinema from '@/pages/chooseCinema'
 import chooseEvent from '@/pages/chooseEvent'
+import order from '@/pages/order'
 
 Vue.use(Router)
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/chooseEvent/:id',
       name: 'chooseEvent',
       component: chooseEvent
+    },
+    {
+      path: '/order/:id',
+      name: 'order',
+      component: order
     }
   ]
 });
