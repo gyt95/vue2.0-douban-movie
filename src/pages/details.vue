@@ -76,6 +76,22 @@
 					</ul>
 				</div>
 
+
+				<div class="pics-part">
+					<p>预告片 / 剧照</p>
+					<ul>
+						<div @click="watching(details.trailers[0].resource_url)"><span></span></div>
+						<img :src="details.trailers[0].medium" alt="" @click="watching(details.trailers[0].resource_url)">
+						<li v-for="pics in filteredItems">
+							<router-link to="/video">
+								<img :src="pics.image" alt="">
+								<!-- <p>{{actors.name}}</p> -->
+							</router-link>
+						</li>
+					</ul>
+				</div>
+
+
 				<div class="comments-part">
 					<p>短评</p>
 					<ul>
@@ -123,8 +139,16 @@
 				<aside class="return-top" @click="backTop" v-if="showBackStatus">
 					<p>返回顶部</p>
 				</aside>
+
 			</div>
 
+			
+		</div>
+		<div v-show="canSee" class="video-mask">
+			<div class="video-box">
+				<img class="video-close" src="../assets/关闭(白).png" alt="" @click="close()">
+				<video :src="videoUrl" width="100%" height="240" autoplay controls autobuffer></video>
+			</div>
 		</div>
 	</div>
 </template>
@@ -154,7 +178,9 @@
 				color:'',
 				color2:'',
 				wanted:'想看',
-				seen:'看过'
+				seen:'看过',
+				videoUrl:'',
+				canSee:false
 			}
 		},
 		computed:{
@@ -162,6 +188,9 @@
 				'isLoading',
 				'details'
 			]),
+			filteredItems(){  /*用于限制剧照显示张数,vue2.0规定，取代limtBy*/
+				return this.details.photos.slice(0,5);
+			}
 		},
 		created(){
 			this.$store.dispatch('detailsAsync',this.id)
@@ -286,6 +315,15 @@
 				}else{ 
 					this.$router.push('/login')
 				}
+			},
+			watching(url){
+				console.log(url);
+				this.videoUrl = url;
+				this.canSee = 'true';
+				console.log(this.canSee);
+			},
+			close(){
+				this.canSee = '';
 			}
 		}
 	}
@@ -351,6 +389,7 @@
 	    position: absolute;
     	top: 13.8rem;
 	    //padding: 0 0.4rem;
+        width: 100%;
 
     	.main-part{
 		    display: flex;
@@ -472,6 +511,63 @@
 			} 
 		}
 
+		.pics-part{
+		    padding: 0.6rem 0.8rem;
+		    overflow: hidden;
+		    overflow-x: auto;
+			p{
+	    	    font-size: 0.6rem;
+				color: grey;
+		    }
+			ul{
+			    height: 5.3rem;
+			    width: 6*8.5rem;
+			    position: relative;
+				li {
+				    display: inline-block;
+				    margin: 0 0.25rem 0 0;
+				    a{
+				    	display: block;
+				    	text-decoration: none;
+				    	p{
+							font-size: 0.6rem;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						    overflow: hidden;
+						    width: 3rem;
+						    margin-right: 0.3rem;
+					        text-align: center;
+						}
+				    }
+				}
+				img{
+				    width: 8rem;
+					height: 5.3rem;
+				}
+				div{
+					position: absolute;
+				    display: block;
+				    width: 30px;
+				    height: 30px;
+				    border-radius: 50%;
+				    background: #000;
+				    opacity: 0.6;
+				    top: 2rem;
+				    left: 3.8rem;
+				    span{
+				    	//三角形原理看张鑫旭博客
+					    display: block;
+					    border-top: 10px solid transparent;
+					    border-left: 15px solid #fff;
+					    border-bottom: 10px solid transparent;
+					    left: 10px;
+					    position: absolute;
+					    top: 5px;
+				    }
+				}
+			} 
+		}
+
 		.comments-part{
 			padding: 0.6rem 0.8rem 0.2rem;
 			border-bottom: 1px solid #ccc;
@@ -587,5 +683,30 @@
 			    padding: 0.3rem;
 		    }
 		}
+		
 	}
+	.video-mask{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    z-index: 30;
+	    background: rgba(55, 55, 55, 1);
+	    .video-box{
+		    width: 100%;
+		    z-index: 40;
+		    height: 100%;
+		    video{
+	    	    top: 24%;
+    			position: absolute;
+		    }
+		    .video-close{
+		    	width: 1.5rem;
+			    position: absolute;
+			    right: 0;
+		    }
+		}
+	}
+	
 </style>

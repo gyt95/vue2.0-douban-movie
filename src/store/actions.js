@@ -156,6 +156,7 @@ export const detailsAsync = ({
 	url += `/${id}?apikey=0b2bdeda43b5688921839c8ecb20399b`;
 	commit('updateLoading', true);
 	axios.get(url).then((res)=>{
+		console.log(res.data)
 		commit('updateDetails', {
 			details: res.data
 		})
