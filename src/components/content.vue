@@ -16,7 +16,8 @@
 							<star :size="24" :score="item.rating.average" style="display: inline;"></star>
 							{{item.rating.average}}
 						</p>
-						<p>导演：{{item.directors[0].name}}</p>
+						<!-- 如果要获取单个数组元素，要进行判断，否则报错Cannot read property 'name' of undefined -->
+						<p v-if="item.directors.length > 0">导演：{{item.directors[0].name}}</p>
 						<span class="casts">主演：
 							<span v-for="(cast,index) in item.casts">{{cast.name}}<span v-if="index < 2">/</span></span>
 						</span>

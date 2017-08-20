@@ -10,7 +10,7 @@
 			</div>
 
 			<div class="detail-image">
-				<img :src="details.images.large">
+				<v-img :imgUrl="details.images.large"></v-img>
 			</div>
 
 			<div class="detail-content">
@@ -64,24 +64,24 @@
 					<span @click="summaryShow" ref="summary">{{details.summary}}</span>
 				</div>
 
-				<div class="actors-part">
+				<div class="actors-part" v-if="details.casts.length>0">
 					<p>影人</p>
 					<ul>
 						<li v-for="actors in details.casts">
 							<router-link :to="{name:'actors',params:{ id: actors.id }}">
-								<img :src="actors.avatars.small" alt="">
+								<img v-if="actors.avatars!=null" :src="actors.avatars.small" alt="">
 								<p>{{actors.name}}</p>
 							</router-link>
 						</li>
 					</ul>
 				</div>
 
-
+				<p class="names">预告片 / 剧照</p>
 				<div class="pics-part">
-					<p>预告片 / 剧照</p>
+					
 					<ul>
 						<div @click="watching(details.trailers[0].resource_url)"><span></span></div>
-						<img :src="details.trailers[0].medium" alt="" @click="watching(details.trailers[0].resource_url)">
+						<img v-if="details.trailers[0] != null" :src="details.trailers[0].medium" alt="" @click="watching(details.trailers[0].resource_url)">
 						<li v-for="pics in filteredItems">
 							<router-link to="/video">
 								<img :src="pics.image" alt="">
@@ -103,7 +103,7 @@
 								<div class="content-top">
 									<span>{{comments.author.name}}</span>
 									<star :size="24" :score="comments.rating.value"></star>
-									<span class="useful">有用{{comments.useful_count}}</span>
+									<span class="useful">有用 {{comments.useful_count}}</span>
 								</div>
 								<span class="content-mid">{{comments.content}}</span>
 								<span class="content-down">{{comments.created_at}}</span>
@@ -159,9 +159,11 @@
 	import BScroll from 'better-scroll'
 	import { showBack, animate } from '@/config/utils'
 	import { fetch,save } from '@/config/utils'
+	import vImg from '@/components/lazyImg'
 	export default{
 		components:{
-			star
+			star,
+			vImg
 		},
 		data(){
 			return{
@@ -451,7 +453,7 @@
 		    display: flex;
 		    justify-content: space-between;
 		    padding: 0.6rem 0.8rem;
-		    border-bottom: 1px solid #ccc;
+		    border-bottom: 1px solid #f2f2f2;
 		    h3,span{
 	    	    font-size: 0.7rem;
 				display: inline-block;
@@ -485,7 +487,7 @@
 		    }
 			ul{
 			    overflow: hidden;
-			    height: 5.3rem;
+			    height: 6rem;
 			    width: 100%;
 				li {
 				    display: inline-block;
@@ -503,22 +505,24 @@
 					        text-align: center;
 						}
 						img{
-							width: 3rem;
+							width: 3.5rem;
 						}
 				    }
 					
 				}
 			} 
 		}
-
+		.names{
+		    padding: 0.6rem 0.8rem 0 0.8rem;
+    	    font-size: 0.6rem;
+			color: grey;
+	    }
 		.pics-part{
-		    padding: 0.6rem 0.8rem;
+		    //padding: 0.6rem 0.8rem;
+	        padding: 0 0.6rem 0.6rem 0.8rem;
 		    overflow: hidden;
 		    overflow-x: auto;
-			p{
-	    	    font-size: 0.6rem;
-				color: grey;
-		    }
+			
 			ul{
 			    height: 5.3rem;
 			    width: 6*8.5rem;
@@ -570,7 +574,7 @@
 
 		.comments-part{
 			padding: 0.6rem 0.8rem 0.2rem;
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid #f2f2f2;
 			p{
 			    font-size: 0.6rem;
 			    color: grey;
@@ -617,6 +621,7 @@
 			a{
 				color: #333;
 				text-decoration: none;
+				display: block;
 			}
 		    padding: 0.6rem 1rem 0;
 			p{
@@ -643,6 +648,7 @@
 					}
 					.content-top{
 						display: flex;
+						margin: 0.3rem 0;
 					}
 					.content-down{
 						word-wrap:break-word;//防止出现一堆连续的英文时会溢出
@@ -652,16 +658,20 @@
 					}
 				}
 			}
-			h3,span{
-				margin-top:0.5rem;
+			//h3,span{
+			//	margin-top:0.5rem;
+			//}
+			h3{
+				margin-top: 1rem;
 			}
+
 		}
 		.btn-part{
 			button{
 				background: #fff;
 			    border: 0;
 			    display: block;
-			    color: green;
+			    color: #42bd56;
 			    font-size: 0.7rem;
 			    margin: 0 auto;
 			    height: 1.6rem;

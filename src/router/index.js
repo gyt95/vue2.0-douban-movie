@@ -14,6 +14,7 @@ import ticket from '@/pages/ticket'
 import chooseCinema from '@/pages/chooseCinema'
 import chooseEvent from '@/pages/chooseEvent'
 import order from '@/pages/order'
+import start from '@/pages/start'
 
 Vue.use(Router)
 
@@ -21,7 +22,16 @@ export default new Router({
   routes: [
     {
       path: '*',
-      redirect: '/home'
+      redirect: '/start'
+    },
+    {
+      path: '/',
+      component: start
+    },
+    //每个路由都必须具有path:'/xxx'，否则报错“ Maximum call stack size exceeded ”
+    {
+      path: '/start',
+      component: start
     },
     {
       path: '/home',
