@@ -89,7 +89,6 @@ export const actorAsync = ({
 };
 
 
-
 export const boardAsync = ({
 	commit,
 	state
@@ -166,4 +165,17 @@ export const detailsAsync = ({
 	}).catch(function (error) {
 	    alert("网络失败");
 	});
+}
+
+
+export const mockAsync = ({
+	commit
+})=>{
+	let url = http + "/cinema";
+	axios.get(url).then((res)=>{
+		console.log(res)
+		commit('mockDatas',{
+			datas: res.data
+		})
+	})
 }

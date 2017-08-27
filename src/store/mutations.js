@@ -58,3 +58,7 @@ export const updateMySelected = (state, selected) => {
 export const updateBoard2 = (state,{ type,datas }) => {
 	state[type].datas = datas;	
 };
+
+export const mockDatas = (state, {datas}) =>{
+	state.mockList = datas
+}

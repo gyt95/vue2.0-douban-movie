@@ -3,9 +3,6 @@
 		<div class="loading" v-show="isLoading"></div>
 		<ul>
 			<li class="movie-wrapper" v-for="(item,index) in datas">
-				<!-- <div v-if="type=='willMovie'">
-					<span>{{item.mainland_pubdate}}</span>
-				</div> -->
 				<router-link class="movie-route" :to="{name:'details',params:{ id: item.id }}">
 					<div class="movie-pic">
 						<img :src="item.images.medium">

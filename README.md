@@ -36,10 +36,11 @@ npm run dev
 - [x] 搜索功能     -- 完成
 - [x] 观看视频功能 -- 完成
 - [x] 用户登录、退出 -- 完成
-- [x] 用户收藏功能（想看、看过） -- 完成
+- [x] 用户收藏功能(想看、看过) -- 完成
 - [x] 模块切换时滚动条相互独立 -- 完成
+- [x] 3s欢迎页(即广告页) -- 完成
+- [x] 图片懒加载 -- 完成
 - [ ] 购票相关页面及功能(选影院、选场次、选座) -- 未完成
-- [ ] 图片懒加载 -- 未完成
 - [ ] 选择城市 -- 未完成
 - [ ] 下拉刷新 -- 未完成
 ...
@@ -78,6 +79,9 @@ npm run dev
 
 ### 登出页、查看电影票页
 <img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/logOut&myTicket.gif" width="365" height="619"/>
+
+### top250页
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/top50.gif" width="365" height="619"/>
 
 ## 感谢
 感谢两个开源项目[elm](https://github.com/liangxiaojuan/eleme)和[vue2-elm](https://github.com/bailicangdu/vue2-elm)，对我本次项目开发有很大帮助。     

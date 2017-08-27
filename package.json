@@ -7,12 +7,14 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "server:api": "node server/api.js"
   },
   "dependencies": {
     "axios": "^0.16.2",
     "better-scroll": "^0.2.4",
     "fastclick": "^1.0.6",
+    "interfake": "^1.19.0",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "stylus": "^0.54.5",
