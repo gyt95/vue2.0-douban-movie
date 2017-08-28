@@ -146,6 +146,9 @@
 <style lang="scss" rel="stylesheet/scss">
 	.search-box{
 		padding: 10px;
+	    //position: fixed;
+	    //z-index: 999;
+	    //background: #fff;
 		.city-text{
 			text-decoration: none;
 			color:#333;
@@ -232,55 +235,70 @@
 			.movie-wrapper{
 			    padding: 0.6rem;
 			    display: flex;
+			    flex-direction:column;
 			    border-bottom: 1px solid lightgrey;
-				.movie-route{
-					//padding: 0.6rem;
-				    display: -webkit-box;
-				    display: -ms-flexbox;
-				    display: flex;
-				    //border-bottom: 1px solid lightgrey;
-				    text-decoration: none;
-				    color: #000;
-				    width: 100%;
-
-				    .movie-pic{
-			    	    display: inline-block;
-	    				//flex: 1;//用了这个在iphone6 plus出现文字图片部分重叠
-
-	    				img{
-	    					width: 4.4rem;
-	    					//height: 100%;
-	    					height: 6.3rem;
-	    				}
+			    .movie-date{
+			    	background: #f2f2f2;
+				    margin: -0.6rem -0.6rem 0.6rem -0.6rem;
+				    padding-left: 0.6rem;
+				    span{
+					    font-size: 0.6rem;
+    					vertical-align: middle;
 				    }
+				    //span.top-fixed{
+					//
+				    //}
+			    }
+			    .movie-card{
+			    	display: flex;
+			    	.movie-route{
+						//padding: 0.6rem;
+					    display: -webkit-box;
+					    display: -ms-flexbox;
+					    display: flex;
+					    //border-bottom: 1px solid lightgrey;
+					    text-decoration: none;
+					    color: #000;
+					    width: 100%;
 
-				    .movie-info{
-			    	    flex: 2;
-	    				padding: 0 0.6rem;
-						.casts{
-							display: block;
-		    				span{
-								display: inline;
+					    .movie-pic{
+				    	    display: inline-block;
+		    				//flex: 1;//用了这个在iphone6 plus出现文字图片部分重叠
+
+		    				img{
+		    					width: 4.4rem;
+		    					//height: 100%;
+		    					height: 6.3rem;
 		    				}
-						}
-	    				h2{
-	    					font-size: 0.8rem;
-	    				}
-	    				p{
-						    display: block;
-	    				}
-	    				h3{
-						    font-size: 0.7rem;
-						    font-weight: normal;
-						    margin-top: 0.5rem;
-	    				}
-	    				p,span{
-						    font-size: 0.55rem;
-						    color: grey;
-	    				}
-				    }
-				}
-			    .ticketBuy{
+					    }
+
+					    .movie-info{
+				    	    flex: 2;
+		    				padding: 0 0.6rem;
+							.casts{
+								display: block;
+			    				span{
+									display: inline;
+			    				}
+							}
+		    				h2{
+		    					font-size: 0.8rem;
+		    				}
+		    				p{
+							    display: block;
+		    				}
+		    				h3{
+							    font-size: 0.7rem;
+							    font-weight: normal;
+							    margin-top: 0.5rem;
+		    				}
+		    				p,span{
+							    font-size: 0.55rem;
+							    color: grey;
+		    				}
+					    }
+					}
+					.ticketBuy{
 			    	    flex: 1;
 					    display: flex;
 					    justify-content: center;
@@ -309,6 +327,9 @@
 							color: grey;
 						}
 				    }
+			    }
+				
+			    
 
 			}
 		}
