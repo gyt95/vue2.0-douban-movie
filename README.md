@@ -81,7 +81,7 @@ npm run dev
 <img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/logOut&myTicket.gif" width="365" height="619"/>
 
 ### top250页
-<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/top50.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/top250.gif" width="365" height="619"/>
 
 ## 感谢
 感谢两个开源项目[elm](https://github.com/liangxiaojuan/eleme)和[vue2-elm](https://github.com/bailicangdu/vue2-elm)，对我本次项目开发有很大帮助。     
