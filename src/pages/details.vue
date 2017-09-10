@@ -15,7 +15,7 @@
 
 			<div class="detail-content">
 				<div class="main-part">
-					<div class="left-box">
+					<div class="left-box" @click="showInfo(details)">
 						<h3 ref="movieName">{{details.title}}</h3>
 						<p>
 						{{details.year}}
@@ -144,12 +144,15 @@
 
 			
 		</div>
-		<div v-show="canSee" class="video-mask">
+		<div v-show="canSeeVideo" class="video-mask">
 			<div class="video-box">
 				<img class="video-close" src="../assets/关闭(白).png" alt="" @click="close()">
 				<video :src="videoUrl" width="100%" height="240" autoplay controls autobuffer></video>
 			</div>
 		</div>
+
+		<div class="movieMask" v-show="canSeeInfo"></div>
+		<movie-info :movieInfo="movieInfo" ref="details" v-on:change="change"></movie-info>
 	</div>
 </template>
 <script>
@@ -160,10 +163,12 @@
 	import { showBack, animate } from '@/config/utils'
 	import { fetch,save } from '@/config/utils'
 	import vImg from '@/components/lazyImg'
+	import movieInfo from '@/components/movieInfo'
 	export default{
 		components:{
 			star,
-			vImg
+			vImg,
+			movieInfo
 		},
 		data(){
 			return{
@@ -182,7 +187,9 @@
 				wanted:'想看',
 				seen:'看过',
 				videoUrl:'',
-				canSee:false
+				canSeeVideo:false,
+				movieInfo:{},
+				canSeeInfo:false
 			}
 		},
 		computed:{
@@ -321,11 +328,21 @@
 			watching(url){
 				console.log(url);
 				this.videoUrl = url;
-				this.canSee = 'true';
-				console.log(this.canSee);
+				this.canSeeVideo = 'true';
+				console.log(this.canSeeVideo);
 			},
 			close(){
-				this.canSee = '';
+				this.canSeeVideo = '';
+			},
+			showInfo(details){
+				this.canSeeInfo = true;
+				this.movieInfo = details;
+				this.$refs.details.show();
+			},
+			change(){
+				setTimeout(function(){
+					this.canSeeInfo = false;
+				}.bind(this), 350)
 			}
 		}
 	}
@@ -718,5 +735,25 @@
 		    }
 		}
 	}
-	
+
+	.movieMask{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    bottom: 0;
+	    right: 0;
+	    margin: auto;
+	    background: #333;
+	    z-index: 3;
+	    opacity: 0.8;
+	}
+
+
+	.fade-enter-active,.fade-leave-active{
+		transform:translateY(0);
+		transition: all 0.3s;
+	}
+	.fade-enter,.fade-leave-active{
+		transform:translateY(100%)
+	}
 </style>

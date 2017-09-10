@@ -2,7 +2,7 @@
 	<div class="choose-event-box">
 		<div class="choose-header">
 			<img src="../assets/登录返回.png" alt="" class="back" @click="back">
-			<h3>橙天嘉禾广州影城</h3>
+			<h3>{{ datas.name }}</h3>
 			<img class="image" src="../assets/搜索.png" alt="">
 		</div>
 		<div class="post-list">
@@ -25,6 +25,8 @@
 		<div class="selected-movie">
 			<div class="movie-title">
 				<h1>星际特工：千星之城</h1>
+				<star :size="24" :score="datas.rating_average" style="padding:0.3rem;display: inline-block;margin-left: -0.2rem;"></star>
+				<span>{{ datas.ratings_count }} 评分</span>
 			</div>
 			<div class="arrow">
 				<img src="../assets/向下.png" alt="">
@@ -40,7 +42,7 @@
 			</div>
 			<div class="event-list">
 				<ul>
-					<li v-for="item in datas">
+					<li v-for="item in datas.data">
 						<router-link :to="{name:'order',params:{id:2}}">
 							<h3>{{ item.time }}</h3>
 							<span>{{ item.type }} </span>
@@ -56,6 +58,7 @@
 </template>
 <script>
 	import axios from 'axios'
+	import star from '@/components/star/star'
 	export default{
 		data(){
 			return{
@@ -71,8 +74,12 @@
 		},
 		computed:{
 			datas(){
+				console.log(this.$store.state.eventList)
 				return this.$store.state.eventList;
 			}
+		},
+		components:{
+			star
 		},
 		methods:{
 			back(){
@@ -174,9 +181,13 @@
 		    	h1{
 		    		font-size: 1rem;
 		    	}	
+		    	span{
+	    		    font-size: 0.8rem;
+    				color: #ccc;
+		    	}
 		    }
 		    .arrow {
-	    		line-height: 1.2rem;
+	    		line-height: 2.2rem;
     			float: right;
 		    	img{
 		    		transform: rotate(-90deg);

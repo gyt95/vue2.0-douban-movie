@@ -171,7 +171,7 @@ export const detailsAsync = ({
 export const mockAsync = ({
 	commit
 }, date)=>{
-	let url = http + "/cinemaList?date=" + date;
+	let url = http + "/cinemaList?count=10&movie_id=11502973&date=" + date;
 	axios.get(url).then((res)=>{
 		commit('mockDatas',{
 			datas: res.data,
@@ -183,11 +183,11 @@ export const mockAsync = ({
 export const eventAsync = ({
 	commit
 }, param) => {
-	let url = http + "/eventList?cinema_id=" + param.id + "&date=" + param.date;
+	let url = http + "/eventList?movie_id=11502973&cinema_id=" + param.id + "&date=" + param.date;
 	axios.get(url).then((res) =>{
-		var data = res.data.data
+		var datas = res.data
 		commit('eventDatas', {
-			datas: data
+			datas: datas
 		})
 	})
 }

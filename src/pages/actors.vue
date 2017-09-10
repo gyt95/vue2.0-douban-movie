@@ -105,7 +105,7 @@
 			back(){
 				this.$router.go(-1)
 			},
-			showInfo(actors){
+			showInfo(actors){  //将对象存入data选项中，通过动态属性传给子组件，并通过ref来调用子组件的方法(?)
 				this.actorInfo = actors;
 				console.log(this.actorInfo)
 				this.$refs.actors.show();

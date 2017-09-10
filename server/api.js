@@ -2,7 +2,7 @@ var Interfake = require('interfake');
 var interfake = new Interfake();
 
 // 显示电影A在某日期，电影院列表
-interfake.get('/cinemaList?date=0826').status(200).body({
+interfake.get('/cinemaList?movie_id=11502973&date=0826').status(200).body({
 	"count":10,
     "data":[
 	    {
@@ -84,12 +84,12 @@ interfake.get('/cinemaList?date=0826').status(200).body({
 	    	"today_remain":1,
 	    	"recent_time":"22:40",
 	    	"distance":8.9
-	    },
+	    }
     ]
 });
 
 
-interfake.get('/cinemaList?date=0827').body({
+interfake.get('/cinemaList?movie_id=11502973&date=0827').body({
 	"count":10,
     "data":[
     	{
@@ -177,17 +177,22 @@ interfake.get('/cinemaList?date=0827').body({
     ]
 });
 
-/* 显示电影A在某日期，电影院B中的放映场次
-// '/cinema/movie_id/cinema_id/event_list'*/
-interfake.get('/eventList?cinema_id=1&date=0826').status(200).body({
+/* chooseEvent.vue  
+   显示电影A在某日期，电影院B中的放映场次
+   '/cinema/movie_id/cinema_id/event_list'
+*/
+interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0826').status(200).body({
 	"count": 5,
+	"name":"橙天嘉禾广州影城",
+	"ratings_count": 55822,
+	"rating_average": 7.2,
 	"data":[
 		{
 			"time":"10:00",
 			"type":"原声",
 			"movie_screen":"3D",
 			"duration":"137分钟",
-			"price":"38",
+			"price":"49.5",
 			"status":1
 		},
 		{
@@ -195,7 +200,7 @@ interfake.get('/eventList?cinema_id=1&date=0826').status(200).body({
 			"type":"原声",
 			"movie_screen":"3D",
 			"duration":"137分钟",
-			"price":"38",
+			"price":"49.5",
 			"status":1
 		},
 		{
@@ -203,7 +208,7 @@ interfake.get('/eventList?cinema_id=1&date=0826').status(200).body({
 			"type":"原声",
 			"movie_screen":"3D",
 			"duration":"137分钟",
-			"price":"38",
+			"price":"49.5",
 			"status":1
 		},
 		{
@@ -211,7 +216,7 @@ interfake.get('/eventList?cinema_id=1&date=0826').status(200).body({
 			"type":"原声",
 			"movie_screen":"3D",
 			"duration":"137分钟",
-			"price":"38",
+			"price":"49.5",
 			"status":1
 		},
 		{
@@ -219,14 +224,17 @@ interfake.get('/eventList?cinema_id=1&date=0826').status(200).body({
 			"type":"原声",
 			"movie_screen":"3D",
 			"duration":"137分钟",
-			"price":"38",
+			"price":"49.5",
 			"status":1
 		}
 	]
 });
 
-interfake.get('/eventList?cinema_id=1&date=0827').status(200).body({
+interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0827').status(200).body({
 	"count": 7,
+	"name":"橙天嘉禾广州影城",
+	"ratings_count": 55822,
+	"rating_average": 7.2,
 	"data":[
 		{
 			"time":"10:00",

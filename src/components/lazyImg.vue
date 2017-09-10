@@ -10,7 +10,7 @@
 		},
 		computed:{
 			imgObj(){
-				console.log(this.imgUrl)
+				// console.log(this.imgUrl)
 				return `${this.imgUrl}`;
 			}
 		}
