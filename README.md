@@ -16,10 +16,13 @@ git clone git@github.com:gyt95/vue2.0-douban-movie.git
 
 cd vue2.0-douban-movie
 
-npm install
+npm install  //安装依赖包
 
-npm run dev
+npm run dev  //开启本地服务器localhost:8090
 
+npm run server:api  //开启api服务器，并将index.html中的ip地址改为你的本地ip地址(模拟数据用于购票部分)
+
+npm run build //发布环境
 ```
 
 ## 功能
@@ -81,7 +84,7 @@ npm run dev
 <img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/logOut&myTicket.gif" width="365" height="619"/>
 
 ### top250页
-<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/top50.gif" width="365" height="619"/>
+<img src="https://github.com/gyt95/vue2.0-douban-movie/blob/master/screen/top250.gif" width="365" height="619"/>
 
 ## 感谢
 感谢两个开源项目[elm](https://github.com/liangxiaojuan/eleme)和[vue2-elm](https://github.com/bailicangdu/vue2-elm)，对我本次项目开发有很大帮助。     

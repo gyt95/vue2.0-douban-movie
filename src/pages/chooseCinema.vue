@@ -7,16 +7,13 @@
 		</div>
 		<div class="choose-date">
 			<ul>
-				<li class="date-active">08.26周六(今天)</li>
-				<li>08.27周日(明天)</li>
-				<li>08.28周一(后天)</li>
-				<li>08.29周二</li>
-				<li>08.30周三</li>
-				<li>08.31周四</li>
+				<li v-for="(item,$index) in dateList" :class="{'date-active':type==$index}" @click="chooseDate(item,$index)">
+					{{item}}
+				</li>
 			</ul>
 		</div>
 		<div class="choose-cinema">
-			<h3 @click="test()">上映此片的全部影院</h3>
+			<h3>上映此片的全部影院</h3>
 			<ul>
 				<li v-for="item in datas.data">
 					<router-link :to="{name:'chooseEvent',params:{id:item.cinema_id}}">
@@ -36,9 +33,12 @@
 </template>
 <script>
 	export default{
-		datas(){
+		data(){
 			return{
-				// id:''
+				dateList:['08.26周六(今天)','08.27周日(明天)',
+						'08.28周一(后天)','08.29周二',
+						'08.30周三','08.31周四'],
+				type:''
 			}
 		},
 		created(){
@@ -56,10 +56,12 @@
 				this.$router.go(-1)
 			},
 			init(){
-				this.$store.dispatch('mockAsync');
+				this.$store.dispatch('mockAsync','0826');
 			},
-			test(){
-				console.log(this.$store.state.mockList)
+			chooseDate(item,index){
+				this.type = index;
+				let date = item.replace('.','').substr(0,4);
+				this.$store.dispatch('mockAsync',date);
 			}
 		}
 	}
@@ -94,7 +96,7 @@
 		}
 
 		.choose-date{
-		    position: fixed;
+		    //position: fixed;
 		    background: lightgrey;
 		    width: 100%;
 		    padding-top: 2.3rem;

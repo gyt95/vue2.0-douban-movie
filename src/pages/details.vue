@@ -519,7 +519,7 @@
 	    }
 		.pics-part{
 		    //padding: 0.6rem 0.8rem;
-	        padding: 0 0.6rem 0.6rem 0.8rem;
+	        padding: 0 0.6rem 0rem 0.8rem;
 		    overflow: hidden;
 		    overflow-x: auto;
 			
@@ -545,7 +545,7 @@
 				    }
 				}
 				img{
-				    width: 8rem;
+				    //width: 8rem;
 					height: 5.3rem;
 				}
 				div{

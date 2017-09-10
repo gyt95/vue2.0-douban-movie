@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="order-box">
 		<div class="choose-header">
 			<img src="../assets/登录返回.png" alt="" class="back" @click="back">
 			<h3>电影票:变形金刚5：最后的骑士</h3>
@@ -7,7 +7,8 @@
 		</div>
 		<div class="order-main">
 			<div class="order-deadline">
-				<span>请在14分52秒内完成支付</span>
+				<!-- <span>请在14分52秒内完成支付</span> -->
+				<span>请在{{remaining}}内完成支付</span>
 			</div>
 			<div class="order-details">
 				<div class="movie-info">
@@ -42,116 +43,179 @@
 </template>
 <script>
 	export default{
+		data(){
+			return{
+				showAlert: false,
+				alertText: null,
+				countNum: 900 //900s，15分钟
+			}
+		},
+		mounted(){
+			this.remainingTime();
+		},
+		beforeDestory(){
+			clearInterval(this.timer);
+		},
+		computed:{
+			remaining(){
+				let min = parseInt(this.countNum / 60); //900s/60s = 15min
+				if(min < 10){
+					min = '0' + min;
+				}
+				let second = parseInt(this.countNum % 60);
+				if(second < 10){
+					second = '0' + second;
+				}
+				return min + '分' + second + '秒';
+			}
+		},
 		methods:{
 			back(){
 				this.$router.go(-1)
+			},
+			remainingTime(){
+				clearInterval(this.timer);
+				this.timer = setInterval(()=>{
+					this.countNum--;
+					// if(this.countNum == 0){
+					// 	clearInterval(this.timer);
+					// 	this.showAlert = true;
+					// 	this.alertText = '支付超时';
+					// }
+				}, 1000);
 			}
 		}
 	}
 </script>
 <style lang="scss" rel="stylesheet/scss">
-	//由于能进来这里，一定已经加载了chooseCinema.vue
-	//所以不再写choose-header，考虑提取组件
-
-	.order-main{
-		padding: 2.2rem 0.7rem 2.5rem;
-    	background: #F2F2F2;
-    	.order-deadline{
-		    text-align: center;
-    		padding: 0.6rem 0;
-    		span{
-			    font-size: 16px;
-			    color: #f3b134;
-			    font-weight: bold;
-    		}
-    	}
-		.order-details{
-			background:#fff;
-			.movie-info{
-				padding: 1rem;
-    			border-bottom: 1px solid #ccc;
-    			h1{
-				    font-size: 0.85rem;
-    				margin-bottom: 0.4rem;
-    				span{
-    					color: #ccc;
-    					font-weight: normal;
-    				}
-    			}
-    			p{
-			    	font-size: 0.8rem;
-    				color: grey;
-    			}
-			}
-			.cinema-info{
-			    padding: 1rem;
-			    h3{
-			    	font-weight: normal;
-				    font-size: 0.75rem;
-				    margin-bottom: 0.8rem;
-			    }		    
-			    .seat{
-		    	    border-bottom: 1px solid #ccc;
-				    padding-bottom: 0.8rem;
-				    margin-bottom: 0;
-			    }
-			}
-			.photo-info{
-				padding: 0 0 1rem;
-			    display: flex;
-			    flex-direction: row;
-			    justify-content: space-between;
-			    align-items: center;
-			    border-bottom: 1px dashed #ccc;
-			    margin: 0 1rem;
-			    h3{
-		    	    font-weight: normal;
-    				font-size: 0.75rem;
-			    }
-			    img{
-		    	    width: 0.6rem;
-			    }
-			}
-		}
-		.order-price{
-			padding: 1rem;
-			h3{
-			    font-weight: normal;
-			}
-			h3,p{
-			    font-size: 0.75rem;
-   	 			margin-bottom: 1rem;
-			}
-			img{
-				width:1.2rem;
-			    vertical-align: middle;
-			    display: inline-block;
-   				margin-right: 1rem;
-			}
-		}
-		.order-tips{
+	.order-box{
+		.choose-header{
+		    display: flex;
+		    align-items: center;
+		    justify-content: flex-start;
 		    padding: 0.6rem 0;
-			p{
-				color:grey;
-				font-size: 0.6rem;
+		    border-bottom: 1px solid #ccc;
+		    position: fixed;
+		    width: 100%;
+		    background: #fff;
+		    z-index: 3;
+		    img{
+	    	    width: 1rem;
+	    		margin-left: 0.2rem;
+		    }
+		    .image{
+		    	width: 0.8rem;
+	   			margin-right: 0.5rem;
+		    }
+		    h3{
+		    	font-size: 0.8rem;
+			    font-weight: normal;
+			    line-height: 0;
+			    margin-left: 1rem;
+			    flex:1;
+		    }
+		}
+
+		.order-main{
+			padding: 2.2rem 0.7rem 2.5rem;
+	    	background: #F2F2F2;
+	    	.order-deadline{
+			    text-align: center;
+	    		padding: 0.6rem 0;
+	    		span{
+				    font-size: 16px;
+				    color: #f3b134;
+				    font-weight: bold;
+	    		}
+	    	}
+			.order-details{
+				background:#fff;
+				.movie-info{
+					padding: 1rem;
+	    			border-bottom: 1px solid #ccc;
+	    			h1{
+					    font-size: 0.85rem;
+	    				margin-bottom: 0.4rem;
+	    				span{
+	    					color: #ccc;
+	    					font-weight: normal;
+	    				}
+	    			}
+	    			p{
+				    	font-size: 0.8rem;
+	    				color: grey;
+	    			}
+				}
+				.cinema-info{
+				    padding: 1rem;
+				    h3{
+				    	font-weight: normal;
+					    font-size: 0.75rem;
+					    margin-bottom: 0.8rem;
+				    }		    
+				    .seat{
+			    	    border-bottom: 1px solid #ccc;
+					    padding-bottom: 0.8rem;
+					    margin-bottom: 0;
+				    }
+				}
+				.photo-info{
+					padding: 0 0 1rem;
+				    display: flex;
+				    flex-direction: row;
+				    justify-content: space-between;
+				    align-items: center;
+				    border-bottom: 1px dashed #ccc;
+				    margin: 0 1rem;
+				    h3{
+			    	    font-weight: normal;
+	    				font-size: 0.75rem;
+				    }
+				    img{
+			    	    width: 0.6rem;
+				    }
+				}
+			}
+			.order-price{
+				padding: 1rem;
+				h3{
+				    font-weight: normal;
+				}
+				h3,p{
+				    font-size: 0.75rem;
+	   	 			margin-bottom: 1rem;
+				}
+				img{
+					width:1.2rem;
+				    vertical-align: middle;
+				    display: inline-block;
+	   				margin-right: 1rem;
+				}
+			}
+			.order-tips{
+			    padding: 0.6rem 0;
+				p{
+					color:grey;
+					font-size: 0.6rem;
+				}
 			}
 		}
-	}
-	.pay-confirm{
-		position:fixed;
-		height:50px;
-		width:100%;
-		background:#509DED;
-		bottom: 0;
-		h2{
-		    color: #fff;
-		    font-size: 1rem;
-		    text-align: center;
-	        position: absolute;
-		    margin: 0 auto;
-		    top: 50%;
-		    left: 50%;
-		    transform: translate(-50%,-50%);
+		.pay-confirm{
+			position:fixed;
+			height:50px;
+			width:100%;
+			background:#509DED;
+			bottom: 0;
+			h2{
+			    color: #fff;
+			    font-size: 1rem;
+			    text-align: center;
+		        position: absolute;
+			    margin: 0 auto;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%,-50%);
+			}
 		}
 	}
 </style>

@@ -5,7 +5,7 @@
 			<li class="movie-wrapper" v-for="(item,index) in datas">
 				<div class="movie-date" v-if="type=='willMovie'">
 					<span v-if="index==0" class="top-fixed">{{item.mainland_pubdate}}</span>
-					<span v-if="index>0&&datas[index].mainland_pubdate!=datas[index-1].mainland_pubdate">{{item.mainland_pubdate}}</span>
+					<span v-if="index>0 && datas[index].mainland_pubdate!=datas[index-1].mainland_pubdate">{{item.mainland_pubdate}}</span>
 				</div>
 				
 				<div class="movie-card">
@@ -75,8 +75,29 @@
 				'homeSelected'
 			]),
 			datas() { //1.相当于datas:function()  2.不需要再在data()中定义数组存放数据
+				// if(this.type=='willMovie'){
+				// 	this.$store.state[this.type].datas.forEach(function(item){
+				// 		var str = item.mainland_pubdate.slice(5);
+				// 		// console.log(item.mainland_pubdate)
+				// 		str = str.replace(/[\-]/g,"月");
+				// 		str += '日'
+				// 		if(str.indexOf(0)!=-1){
+				// 			if(str.indexOf(0)==0)
+				// 				str = str.slice(1);
+				// 			if(str.indexOf('月0')!=-1){
+				// 				var num = str.indexOf('月');
+				// 				var str1 = str.slice(0,num+1);
+				// 				var str2 = str.slice(num+2);
+				// 				str = str1.concat(str2);
+				// 			}
+				// 		}
+				// 		item.mainland_pubdate = str;
+						
+				// 	});
+				// }
 		    	return this.$store.state[this.type].datas;
 		    },
+
 		    // allDates(){  //用于过滤掉重复的api数据，不过暂时无用
 		    // 	var dateList = this.$store.state[this.type].datas.map(m => m.mainland_pubdate);
 		    // 	console.log([...new Set(dateList)])
@@ -91,7 +112,6 @@
 				type.city = this.city;
 				this.$store.dispatch('dataAsync',type);
 			}
-			
 		},
 		mounted(){
 			this.initData();

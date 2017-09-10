@@ -13,7 +13,7 @@ export const updateSelected = (state, selected) => {
 	}else{
 		state.homeSelected = selected;
 	}
-}
+};
 
 export const updateScrollY = (state,{ type,scrollY }) => {
 	state[type].scrollY = scrollY;
@@ -27,7 +27,7 @@ export const updateList = (state,{ list }) => {
 	state.list.title = list.title;
 	state.list.total = list.total;
 	state.list.subjects = list.subjects;
-}
+};
 
 export const login = (state) => {
 	console.log(state.username,state.password);
@@ -40,7 +40,7 @@ export const updateActor = (state,{ actors }) => {
 export const updateBoard = (state,{ datas,name }) => {
 	state.board.datas = datas;
 	state.board.name = name;
-}
+};
 
 export const updateTitle = (state,{ name })=>{
 	if(name == 'us_box'){
@@ -49,16 +49,20 @@ export const updateTitle = (state,{ name })=>{
 	else{
 		state.boardTitle = '豆瓣 Top250';
 	}
-}
+};
 
 export const updateMySelected = (state, selected) => {
 	state.mySelected = selected;
-}
+};
 
 export const updateBoard2 = (state,{ type,datas }) => {
 	state[type].datas = datas;	
 };
 
-export const mockDatas = (state, {datas}) =>{
-	state.mockList = datas
-}
+export const mockDatas = (state, { datas }) =>{
+	state.mockList = datas;
+};
+
+export const eventDatas = (state, { datas }) =>{
+	state.eventList = datas;
+};

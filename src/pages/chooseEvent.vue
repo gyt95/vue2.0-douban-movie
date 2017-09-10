@@ -33,59 +33,20 @@
 		<div class="choose-event">
 			<div class="choose-date">
 				<ul>
-					<li class="date-active">08.26周六(今天)</li>
-					<li>08.27周日(明天)</li>
-					<li>08.28周一(后天)</li>
-					<li>08.29周二</li>
-					<li>08.30周三</li>
-					<li>08.31周四</li>
+					<li v-for="(item,$index) in dateList" :class="{'date-active':type==$index}" @click="chooseDate(item,$index)">
+						{{item}}
+					</li>
 				</ul>
 			</div>
 			<div class="event-list">
 				<ul>
-					<li>
+					<li v-for="item in datas">
 						<router-link :to="{name:'order',params:{id:2}}">
-							<h3>17:20</h3>
-							<span>原声 </span>
-							<span>3D</span>
-							<p>137分钟</p>
-							<h1>￥49.5</h1>
-						</router-link>
-					</li>
-					<li>
-						<router-link :to="{name:'order',params:{id:2}}">
-							<h3>17:20</h3>
-							<span>原声 </span>
-							<span>3D</span>
-							<p>137分钟</p>
-							<h1>￥49.5</h1>
-						</router-link>
-					</li>
-					<li>
-						<router-link :to="{name:'order',params:{id:2}}">
-							<h3>17:20</h3>
-							<span>原声 </span>
-							<span>3D</span>
-							<p>137分钟</p>
-							<h1>￥49.5</h1>
-						</router-link>
-					</li>
-					<li>
-						<router-link :to="{name:'order',params:{id:2}}">
-							<h3>17:20</h3>
-							<span>原声 </span>
-							<span>3D</span>
-							<p>137分钟</p>
-							<h1>￥49.5</h1>
-						</router-link>
-					</li>
-					<li>
-						<router-link :to="{name:'order',params:{id:2}}">
-							<h3>17:20</h3>
-							<span>原声 </span>
-							<span>3D</span>
-							<p>137分钟</p>
-							<h1>￥49.5</h1>
+							<h3>{{ item.time }}</h3>
+							<span>{{ item.type }} </span>
+							<span>{{ item.movie_screen }}</span>
+							<p>{{ item.duration }}</p>
+							<h1>￥{{ item.price }}</h1>
 						</router-link>
 					</li>
 				</ul>
@@ -98,16 +59,38 @@
 	export default{
 		data(){
 			return{
-				
+				dateList:['08.26周六(今天)','08.27周日(明天)',
+						'08.28周一(后天)','08.29周二',
+						'08.30周三','08.31周四'],
+				type:''
 			}
 		},
 		created(){
-			
+			this.init();
+			console.log()
+		},
+		computed:{
+			datas(){
+				return this.$store.state.eventList;
+			}
 		},
 		methods:{
 			back(){
 				this.$router.go(-1)
 			},
+			init(){
+				let param = {};
+				param.id = this.$route.params.id;
+				param.date = '0826'
+				this.$store.dispatch('eventAsync',param);
+			},
+			chooseDate(item,index){
+				this.type = index;
+				let param = {};
+				param.id = this.$route.params.id;
+				param.date = item.replace('.','').substr(0,4);
+				this.$store.dispatch('eventAsync',param);
+			}
 		}
 	}
 </script>
@@ -193,13 +176,13 @@
 		    	}	
 		    }
 		    .arrow {
-	    		line-height: 1rem;
+	    		line-height: 1.2rem;
     			float: right;
 		    	img{
 		    		transform: rotate(-90deg);
 				    width: 1rem;
-				    display: inline-block;
-				    text-align: right;
+				    //display: inline-block;
+				    //text-align: right;
 
 				    vertical-align: middle;
 			    }
@@ -241,7 +224,10 @@
 				    border: 1px solid blue;
 				    display: inline-block;
 				    background: #fff;
-				    margin-bottom: 0.5rem;
+				    //margin-bottom: 0.5rem;
+			        margin: 0.25rem;
+				    padding: 0.2rem;
+				    border-radius: 4px;
 				    a{
 			    	    text-decoration: none;
 					    display: block;
@@ -249,6 +235,7 @@
 				    }
 				    h3{
 			    	    color: #000;
+			    	    font-size: 1rem;
 				    }
 				    span{
 			    	    color: blue;
@@ -259,7 +246,7 @@
 	    				font-size: 0.6rem;
 				    }
 				    h1{
-			    	    font-size: 1.2rem;
+			    	    font-size: 1rem;
 					    color: orange;
 					    font-weight: normal;
 					    text-indent: -0.2rem;

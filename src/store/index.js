@@ -45,7 +45,8 @@ const state = {
 	three:{datas:[],start:100,scrollY:0},
 	four:{datas:[],start:150,scrollY:0},
 	five:{datas:[],start:200,scrollY:0},
-	mockList:[]
+	mockList:[],
+	eventList:[]
 };
 
 
