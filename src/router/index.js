@@ -1,22 +1,22 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import home from '@/pages/home'
-import find from '@/pages/find'
-import my from '@/pages/my'
-import search from '@/pages/search'
-import details from '@/pages/details'
-import searchList from '@/pages/searchList'
-import login from '@/pages/login'
-import actors from '@/pages/actors'
-import billboard from '@/pages/billboard'
-import reviews from '@/pages/reviews'
-import ticket from '@/pages/ticket'
-import chooseCinema from '@/pages/chooseCinema'
-import chooseEvent from '@/pages/chooseEvent'
-import order from '@/pages/order'
-import start from '@/pages/start'
+import Vue from 'vue';
+import Router from 'vue-router';
+import home from '@/pages/home';
+import find from '@/pages/find';
+import my from '@/pages/my';
+import search from '@/pages/search';
+import details from '@/pages/details';
+import searchList from '@/pages/searchList';
+import login from '@/pages/login';
+import actors from '@/pages/actors';
+import billboard from '@/pages/billboard';
+import reviews from '@/pages/reviews';
+import ticket from '@/pages/ticket';
+import chooseCinema from '@/pages/chooseCinema';
+import chooseEvent from '@/pages/chooseEvent';
+import order from '@/pages/order';
+import start from '@/pages/start';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
