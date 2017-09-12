@@ -12,7 +12,6 @@ export const dataAsync = ({
 			commit('updateLoading', true);
 			axios.get(url)
 			.then((res)=>{
-				console.log(res.data)
 				commit('updateDatas',{
 					datas: res.data.subjects,
 					type:type.type
@@ -21,7 +20,7 @@ export const dataAsync = ({
 					commit('updateLoading', false);
 				});
 			})
-			.catch(function (error) {
+			.catch((error)=>{
 			    alert("网络失败");
 			});
 		}
@@ -30,7 +29,6 @@ export const dataAsync = ({
 		if(state[type].datas.length == 0){
 			commit('updateLoading', true);
 			axios.get(url).then((res)=>{
-				console.log(res.data)
 				commit('updateDatas',{
 					datas: res.data.subjects,
 					type
@@ -38,7 +36,7 @@ export const dataAsync = ({
 				Vue.nextTick(()=>{
 					commit('updateLoading', false);
 				});
-			}).catch(function (error) {
+			}).catch((error)=>{
 			    alert("网络失败");
 			});
 		}
@@ -57,14 +55,13 @@ export const searchAsync = ({
 	url += `/search?q=${query}&start=0`;
 	commit('updateLoading', true);
 	axios.get(url).then((res)=>{
-		console.log(res.data)
 		commit('updateList',{
 			list: res.data
 		})
 		Vue.nextTick(()=>{
 			commit('updateLoading', false);
 		})
-	}).catch(function (error) {
+	}).catch((error)=>{
 	    alert("网络失败");
 	});
 }
@@ -83,7 +80,7 @@ export const actorAsync = ({
 		Vue.nextTick(()=>{
 			commit('updateLoading', false);
 		});
-	}).catch(function (error) {
+	}).catch((error)=>{
 	    alert("网络失败");
 	});
 };
@@ -108,7 +105,7 @@ export const boardAsync = ({
 			commit('updateTitle', {name});
 		});
 	})
-	.catch(function (error) {
+	.catch((error)=>{
 	    alert("网络失败");
 	});
 };
@@ -139,7 +136,7 @@ export const board2Async = ({
 				commit('updateTitle', {name});
 			}
 		});
-	}).catch(function (error) {
+	}).catch((error)=>{
 	    alert("网络失败");
 	});
 };
@@ -155,14 +152,13 @@ export const detailsAsync = ({
 	url += `/${id}?apikey=0b2bdeda43b5688921839c8ecb20399b`;
 	commit('updateLoading', true);
 	axios.get(url).then((res)=>{
-		console.log(res.data)
 		commit('updateDetails', {
 			details: res.data
 		})
 		Vue.nextTick(()=>{
 			commit('updateLoading', false);
 		})
-	}).catch(function (error) {
+	}).catch((error)=>{
 	    alert("网络失败");
 	});
 }
@@ -171,7 +167,7 @@ export const detailsAsync = ({
 export const mockAsync = ({
 	commit
 }, date)=>{
-	let url = http + "/cinemaList?count=10&movie_id=11502973&date=" + date;
+	let url = `${http}/cinemaList?count=10&movie_id=11502973&date=${date}`;
 	axios.get(url).then((res)=>{
 		commit('mockDatas',{
 			datas: res.data,
@@ -183,9 +179,9 @@ export const mockAsync = ({
 export const eventAsync = ({
 	commit
 }, param) => {
-	let url = http + "/eventList?movie_id=11502973&cinema_id=" + param.id + "&date=" + param.date;
+	let url = `${http}/eventList?movie_id=11502973&cinema_id=${param.id}&date=${param.date}`;
 	axios.get(url).then((res) =>{
-		var datas = res.data
+		let datas = res.data
 		commit('eventDatas', {
 			datas: datas
 		})

@@ -21,18 +21,15 @@
 		},
 		created(){
 			this.startFlag=true;
-			console.log(2332)
-			setTimeout(function(){
+			setTimeout(()=>{
 				this.$router.push('/home')
-			}.bind(this),4000);
-			//setTimeout中的this是指向全局的，因此需要用bind来把this指回来
-
-			var timer = setInterval(function(){
+			}, 4000);
+			let timer = setInterval(()=>{
 				this.num--;
 				if(this.num < 0){
 					clearInterval(timer)
 				}
-			}.bind(this), 1000);
+			}, 1000);
 		},
 		methods:{
 			jump(){

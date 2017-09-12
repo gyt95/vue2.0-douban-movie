@@ -329,7 +329,6 @@
 				console.log(url);
 				this.videoUrl = url;
 				this.canSeeVideo = 'true';
-				console.log(this.canSeeVideo);
 			},
 			close(){
 				this.canSeeVideo = '';
