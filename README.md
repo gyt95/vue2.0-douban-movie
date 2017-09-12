@@ -45,7 +45,8 @@ npm run build //发布环境
 - [x] 模块切换时滚动条相互独立 -- 完成
 - [x] 3s欢迎页(即广告页) -- 完成
 - [x] 图片懒加载 -- 完成
-- [ ] 购票相关页面及功能(选影院、选场次、选座) -- 未完成
+- [ ] 购票相关页面及功能(选影院、选场次、选座) -- 正在进行中...
+- [ ] 影评详情页 -- 未完成
 - [ ] 选择城市 -- 未完成
 - [ ] 下拉刷新 -- 未完成
 ...
@@ -65,6 +66,86 @@ npm run build //发布环境
 3、网上有很多用Vue写的仿豆瓣的web app，但感觉内容较宽泛，读书电影音乐日记等等。。而用Vue写的仿豆瓣电影项目一般以PC端居多  
 4、豆瓣电影移动端页面比较简洁，没有太复杂的效果，较适合新手  
 
+## 项目结构
+```
+.
+├─ build                              //webpack配置文件
+│    ...
+│  
+├─ config                             //项目打包路径
+│    ...
+│  
+├─ screen                             //项目截图
+│    ...
+│  
+├─ server                             //api服务器
+│    ...
+│  
+├─ src
+│  ├─ assets                          //静态资源文件
+│  │    ...
+│  │  
+│  ├─ components                      //组件
+│  │  ├─ board                        //榜单组件
+│  │  │    ...
+│  │  |
+│  │  ├─ footer                       //底部组件
+│  │  │    ...        
+│  │  |
+│  │  ├─ star                         //评分组件
+│  │  │    ...
+│  │  |
+│  │  ├─ actor.vue                    //影人信息组件
+│  │  ├─ content.vue                  
+│  │  ├─ lazyImg.vue                  //图片懒加载组件
+│  │  ├─ movieInfo.vue                //电影信息组件
+│  │  └─ record.vue                   //用户收藏组件
+│  │ 
+│  ├─ config                          //基本配置
+│  │  ├─ rem.js                       //px转换rem
+│  │  └─ utils.js                     //一些js方法
+│  │ 
+│  ├─ pages
+│  │  ├─ actors.vue                   //影人详情页
+│  │  ├─ billboard.vue                //榜单页
+│  │  ├─ chooseCinema.vue             //选择影院页
+│  │  ├─ chooseEvent.vue              //选择场次页
+│  │  ├─ details.vue                  //电影详情页
+│  │  ├─ find.vue                     //发现页
+│  │  ├─ home.vue                     //首页
+│  │  ├─ login.vue                    //登录页
+│  │  ├─ my.vue                       //个人中心页
+│  │  ├─ order.vue                    //订单页      
+│  │  ├─ reviews.vue                  //影评详情页(待完成)
+│  │  ├─ search.vue                   //搜索页
+│  │  ├─ searchList.vue               //搜索结果页
+│  │  ├─ start.vue                    //欢迎页
+│  │  └─ ticket.vue                   //查看电影票页
+│  │
+│  ├─ router                          //路由配置
+│  │    ...
+│  │ 
+│  ├─ store                           //vuex状态管理
+│  │    ...
+│  │ 
+│  ├─ App.vue                         //页面主组件
+│  └─ main.js                         //程序入口文件，用于初始化vue实例等
+│
+├─ static                             //放置图标
+│    ...
+│ 
+├─ .babelrc
+├─ .editorconfig
+├─ .gitignore
+├─ .postcssrc.js
+├─ README.md
+├─ debug.log
+├─ index.html                         //入口html文件
+├─ package.json
+└─ record.txt                         //本项目的开发记录
+
+
+```
 
 ## 项目部分截图
 ### 首页
