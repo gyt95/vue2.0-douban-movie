@@ -59,7 +59,9 @@
 				</div>
 			</div>
 		</div>
-		<v-actor :actorInfo="actorInfo" ref="actors"></v-actor>
+
+		<div class="actorsMask" v-show="canSeeInfo"></div>
+		<v-actor :actorInfo="actorInfo" ref="actors" v-on:change="change"></v-actor>
 	</div>
 </template>
 <script>
@@ -72,7 +74,8 @@
 				id:this.$route.params.id,
 				scroll:'',
 				title:'影人',
-				actorInfo:{}
+				actorInfo:{},
+				canSeeInfo:false
 			}
 		},
 		components:{
@@ -106,9 +109,15 @@
 				this.$router.go(-1)
 			},
 			showInfo(actors){  //将对象存入data选项中，通过动态属性传给子组件，并通过ref来调用子组件的方法(?)
+				this.canSeeInfo = true;
 				this.actorInfo = actors;
 				console.log(this.actorInfo)
 				this.$refs.actors.show();
+			},
+			change(){
+				setTimeout(()=>{
+					this.canSeeInfo = false;
+				}, 350)
 			}
 		}
 	}
@@ -302,6 +311,18 @@
 			    padding: 0.3rem;
 		    }
 		}
+	}
+
+	.actorsMask{
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    bottom: 0;
+	    right: 0;
+	    margin: auto;
+	    background: #333;
+	    z-index: 3;
+	    opacity: 0.8;
 	}
 
 	.fade-enter-active,.fade-leave-active{

@@ -69,10 +69,8 @@
 			},
 			hide(){
 				this.infoShow = false;
+				this.$emit('change',false);
 			}
-		},
-		created(){
-			console.log(4444)
 		}
 	}
 </script>

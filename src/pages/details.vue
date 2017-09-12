@@ -339,9 +339,9 @@
 				this.$refs.details.show();
 			},
 			change(){
-				setTimeout(function(){
+				setTimeout(()=>{
 					this.canSeeInfo = false;
-				}.bind(this), 350)
+				}, 350)
 			}
 		}
 	}

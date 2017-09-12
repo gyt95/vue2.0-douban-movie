@@ -96,7 +96,7 @@ npm run build //发布环境
 │  │  │    ...
 │  │  |
 │  │  ├─ actor.vue                    //影人信息组件
-│  │  ├─ content.vue                  
+│  │  ├─ content.vue      			  //首页tab组件            
 │  │  ├─ lazyImg.vue                  //图片懒加载组件
 │  │  ├─ movieInfo.vue                //电影信息组件
 │  │  └─ record.vue                   //用户收藏组件
