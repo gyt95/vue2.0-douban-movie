@@ -40,7 +40,7 @@
 					</div>
 				</div>
 			</swiper-slide>
-			<div class="swiper-pagination swiper-point" slot="pagination"></div>
+			<div class="swiper-pagination swiper-point" slot="pagination" style="text-align: right;"></div>
 		</swiper>
 
 		<!-- swiper模块 -->
@@ -59,6 +59,7 @@
 </template>
 <script>
 	import { swiper,swiperSlide } from 'vue-awesome-swiper'
+	require('swiper/dist/css/swiper.css')
 	import vFooter from '../components/footer/footer'
 	import vContent from '../components/content'
 	import { swiperPlugins } from 'vue-awesome-swiper'
@@ -207,7 +208,8 @@
 		}
 	}
 	.swiper-pagination-bullet-active{
-		background: #d3d3d3;
+		//background: #d3d3d3;
+		background: #fff;
 	}
 
 	.swiper-pagination-fraction, .swiper-pagination-custom, .swiper-container-horizontal > .swiper-pagination-bullets{
