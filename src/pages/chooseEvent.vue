@@ -6,21 +6,17 @@
 			<img class="image" src="../assets/搜索.png" alt="">
 		</div>
 		<div class="post-list">
-			<ul>
-				<li>
-					<img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2496088130.jpg" alt="">
-				</li>
-				<li>
-					<img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494135894.jpg" alt="">
-				</li>
-				<li>
-					<img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2492869476.jpg" alt="">
-				</li>
-				<li>
-					<img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494948513.jpg" alt="">
-				</li>
-			</ul>
-			<div class="special"></div>
+		 <swiper :options="swiperOption" style="padding:0.4rem 0">
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2496088130.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2492869476.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494135894.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2496088130.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494135894.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2496088130.jpg" alt=""></swiper-slide>
+	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494135894.jpg" alt=""></swiper-slide>
+	        <div class="swiper-pagination" slot="pagination"></div>
+	      </swiper>
+			
 		</div>
 		<div class="selected-movie">
 			<div class="movie-title">
@@ -57,6 +53,7 @@
 	</div>
 </template>
 <script>
+	import { swiper,swiperSlide } from 'vue-awesome-swiper'
 	import axios from 'axios'
 	import star from '@/components/star/star'
 	export default{
@@ -65,7 +62,14 @@
 				dateList:['08.26周六(今天)','08.27周日(明天)',
 						'08.28周一(后天)','08.29周二',
 						'08.30周三','08.31周四'],
-				type:''
+				type:'',
+				swiperOption: {
+		          //pagination: '.swiper-pagination', //底部小圆点
+		          slidesPerView: 3, //slider容器能够同时显示的slides数量
+		          centeredSlides: true, //活动块会居中，而不是默认状态下的居左
+		          //paginationClickable: true, //小圆点可以点击
+		          //spaceBetween: 90 //slider间隔
+		        }
 			}
 		},
 		created(){
@@ -79,7 +83,9 @@
 			}
 		},
 		components:{
-			star
+			star,
+			swiper,
+			swiperSlide,
 		},
 		methods:{
 			back(){
@@ -136,7 +142,7 @@
 		    overflow: hidden;
     		overflow-x: scroll;
 		    margin-bottom: 1rem;
-
+			
 			ul{
 			    width: 28rem;
 		        position: relative;
@@ -270,5 +276,31 @@
 			border-bottom:1.5px solid blue;
 		}
 	}
-	
+
+	.swiper-wrapper{
+		padding: 0.4rem 0px;
+	}
+	.swiper-slide {
+	    img {
+			width:4rem;
+			height:6rem;
+	    }
+	}
+	.swiper-slide-active{
+	    transform: scale(1.1);
+   		border: 2px solid #fff;
+	    width: 5rem;
+    	margin-right: 20px;
+		img{
+			width: 5.3rem;
+			height: 7rem;
+		    vertical-align: middle;
+		}
+	}
+	.swiper-slide .swiper-slide-prev,
+	.swiper-slide .swiper-slide-next{
+	        transform-origin: bottom center;
+    		transform: scale(0.88);
+	}
+
 </style>

@@ -147,7 +147,7 @@
 		<div v-show="canSeeVideo" class="video-mask">
 			<div class="video-box">
 				<img class="video-close" src="../assets/关闭(白).png" alt="" @click="close()">
-				<video :src="videoUrl" width="100%" height="240" autoplay controls autobuffer></video>
+				<video id="video" :src="videoUrl" width="100%" height="240" autoplay controls autobuffer></video>
 			</div>
 		</div>
 
@@ -157,7 +157,7 @@
 </template>
 <script>
 	import axios from 'axios'
-	import { mapState } from 'vuex';
+	import { mapState } from 'vuex'
 	import star from '@/components/star/star'
 	import BScroll from 'better-scroll'
 	import { showBack, animate } from '@/config/utils'
@@ -331,6 +331,8 @@
 				this.canSeeVideo = 'true';
 			},
 			close(){
+				let video = document.getElementById('video');
+				video.pause();
 				this.canSeeVideo = '';
 			},
 			showInfo(details){
