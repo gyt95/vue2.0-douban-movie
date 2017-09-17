@@ -50,13 +50,11 @@
 					<button :class="color2" @click="record2(details)">{{seen}}</button>
 				</div>
 
-				<div class="ticket-part">
-					<!-- <router-link> -->
-						<h3>选座购票</h3>
-							<span class="arrow">
-								&nbsp;>
-							</span>
-					<!-- </router-link> -->
+				<div class="ticket-part" @click="gotoBuy">
+					<h3>选座购票</h3>
+					<span class="arrow">
+						&nbsp;>
+					</span>
 				</div>
 
 				<div class="info-part">
@@ -344,6 +342,9 @@
 				setTimeout(()=>{
 					this.canSeeInfo = false;
 				}, 350)
+			},
+			gotoBuy(){
+				this.$router.push({name:'chooseCinema', params:{id:this.details.id}})
 			}
 		}
 	}

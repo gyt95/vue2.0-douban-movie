@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="actors-box">
 		<div class="search-loading" v-show="isLoading"></div>
 		<div v-if="!isLoading">
 		
@@ -10,7 +10,7 @@
 			</div>
 
 			<div class="detail-image">
-				<img :src="actors.avatars.large">
+				<v-img :imgUrl="actors.avatars.large"></v-img>
 			</div>
 
 			<div class="detail-content">
@@ -68,6 +68,7 @@
 	import { mapState } from 'vuex';
 	import star from '@/components/star/star'
 	import vActor from '@/components/actor'
+	import vImg from '@/components/lazyImg'
 	export default{
 		data(){
 			return{
@@ -79,7 +80,7 @@
 			}
 		},
 		components:{
-			star,vActor
+			star,vActor,vImg
 		},
 		created(){
 			this.actorDetail()
@@ -123,124 +124,102 @@
 	}
 </script>
 <style lang="scss" rel="stylesheet/scss">
-	.search-loading{
-		background:url(../assets/loading_green.gif) no-repeat;
-		background-size: 100% 100%;
-	    width: 2rem;
-	    height: 2rem;
-        margin: 0 auto;    
-        position: absolute;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%,-50%);
-	}
-	.detail-header{
-		height: 1.8rem;
-	    background: #333;
-	    display: flex;
-	    justify-content: space-between;
-	    color: #fff;
-	    position: fixed;
-	    width: 100% !important;
-		z-index: 2;
-		.back{
-			width: 1.3rem;
-    	    height: 1.3rem;
-		    display: inline-block;
-		    padding: 0.3rem;
-		}
-	    h3{
-    	    font-size: 0.85rem;
-		    font-weight: normal;
-		    line-height: 1.8rem;
-	    }
-	    i{
-	    	font-size: 0.7rem;
-		    padding: 0 0.3rem;
-		    line-height: 2.3rem;
-		    img{
-    	    	width: 1rem;
-		    }
-	    }
-	}
+	.actors-box{
 
-	.detail-image{
-	    padding-top: 1.8rem;
-	    height: 11rem;
-	    width: 100%;
-	    background: #333;
 
-	    img{
-    	    width: 7rem;
-		    position: absolute;
-		    top: 25%;
+		.search-loading{
+			background:url(../assets/loading_green.gif) no-repeat;
+			background-size: 100% 100%;
+		    width: 2rem;
+		    height: 2rem;
+	        margin: 0 auto;    
+	        position: absolute;
+		    top: 50%;
 		    left: 50%;
 		    transform: translate(-50%,-50%);
-	    }
-	}
-
-	.detail-content{
-	    position: absolute;
-    	top: 13.8rem;
-	    //padding: 0 0.4rem;
-	    width:100%;
-
-    	.main-part{
+		}
+		.detail-header{
+			height: 1.8rem;
+		    background: #333;
 		    display: flex;
-    		justify-content: center;
+		    justify-content: space-between;
+		    color: #fff;
+		    position: fixed;
+		    width: 100% !important;
+			z-index: 2;
+			.back{
+				width: 1.3rem;
+	    	    height: 1.3rem;
+			    display: inline-block;
+			    padding: 0.3rem;
+			}
+		    h3{
+	    	    font-size: 0.85rem;
+			    font-weight: normal;
+			    line-height: 1.8rem;
+		    }
+		    i{
+		    	font-size: 0.7rem;
+			    padding: 0 0.3rem;
+			    line-height: 2.3rem;
+			    img{
+	    	    	width: 1rem;
+			    }
+		    }
+		}
 
-    		.left-box{
-    		    flex: 1;
-    			margin-left: 0.8rem;
-    			h3{
-				    font-size: 1rem;
-    			}
-    			p{
-    				font-size: 0.6rem;
-    				color: grey;
-    			}
-    		}
-    	}
+		.detail-image{
+		    padding-top: 1.8rem;
+		    height: 11rem;
+		    width: 100%;
+		    background: #333;
 
-		.info-part{
-		    padding: 0.6rem 0.8rem;
-		    p{
-	    	    font-size: 0.6rem;
-				color: grey;
+		    img{
+	    	    width: 7rem;
+			    position: absolute;
+			    top: 25%;
+			    left: 50%;
+			    transform: translate(-50%,-50%);
 		    }
-		    span{
-	    	    font-size: 0.6rem;
-			    overflow: hidden;
-			    display: -webkit-box;
-			    -webkit-box-orient: vertical;
-			    -webkit-line-clamp: 5;
-		    }
-		    h2{
-		    	display:inline-block;
-		    	font-size: 0.6rem;
-				width: 5rem;
-				font-weight: normal;
-				flex:1;
-		    }
-		    ul{
-				list-style: none;
-				flex:2;
-				span,li{
-					display: inline;
-				}
-		    }
-		    .info-mid{
-		    	padding-bottom: 1rem;
-		    	p{
-				    font-size: 0.6rem;
+		}
+
+		.detail-content{
+		    position: absolute;
+	    	top: 13.8rem;
+		    //padding: 0 0.4rem;
+		    width:100%;
+
+	    	.main-part{
+			    display: flex;
+	    		justify-content: center;
+
+	    		.left-box{
+	    		    flex: 1;
+	    			margin-left: 0.8rem;
+	    			h3{
+					    font-size: 1rem;
+	    			}
+	    			p{
+	    				font-size: 0.6rem;
+	    				color: grey;
+	    			}
+	    		}
+	    	}
+
+			.info-part{
+			    padding: 0.6rem 0.8rem;
+			    p{
+		    	    font-size: 0.6rem;
 					color: grey;
 			    }
 			    span{
-			    	font-size: 0.6rem;  
-					display:flex;
-					flex: 2;
+		    	    font-size: 0.6rem;
+				    overflow: hidden;
+				    display: -webkit-box;
+				    -webkit-box-orient: vertical;
+				    -webkit-line-clamp: 5;
 			    }
-			    h3{
+			    h2{
 			    	display:inline-block;
 			    	font-size: 0.6rem;
 					width: 5rem;
@@ -254,82 +233,108 @@
 						display: inline;
 					}
 			    }
-		    }
-		}
-	
-		.works-title{
-			color:grey;
-		    font-size: 0.6rem;
-		    padding: 0.6rem 0.8rem 0;
-		}
-
-		.movies-part{
-		    padding: 0.6rem 0.8rem;
-	        overflow: hidden;
-    		overflow-x: auto;
-			ul{
-		        height: 7.3rem;
-    			width: 410px;
-				li {
-				    display: inline-block;
-				    margin: 0 0.05rem 0;
-				    a{
-				    	display: block;
-				    	text-decoration: none;
-						p{
-							font-size: 0.6rem;
-						    white-space: nowrap;
-						    text-overflow: ellipsis;
-						    overflow: hidden;
-						    width: 3rem;
-						    margin-right: 0.3rem;
-					        text-align: center;
-					        color: grey;
+			    .info-mid{
+			    	padding-bottom: 1rem;
+			    	p{
+					    font-size: 0.6rem;
+						color: grey;
+				    }
+				    span{
+				    	font-size: 0.6rem;  
+						display:flex;
+						flex: 2;
+				    }
+				    h3{
+				    	display:inline-block;
+				    	font-size: 0.6rem;
+						width: 5rem;
+						font-weight: normal;
+						flex:1;
+				    }
+				    ul{
+						list-style: none;
+						flex:2;
+						span,li{
+							display: inline;
 						}
-						img{
-							width: 3rem;
-						    height: 4.6rem;
+				    }
+			    }
+			}
+		
+			.works-title{
+				color:grey;
+			    font-size: 0.6rem;
+			    padding: 0.6rem 0.8rem 0;
+			}
+
+			.movies-part{
+			    padding: 0.6rem 0.8rem;
+		        overflow: hidden;
+	    		overflow-x: auto;
+				ul{
+			        height: 7.3rem;
+	    			width: 410px;
+					li {
+					    display: inline-block;
+					    margin: 0 0.05rem 0;
+					    a{
+					    	display: block;
+					    	text-decoration: none;
+							p{
+								font-size: 0.6rem;
+							    white-space: nowrap;
+							    text-overflow: ellipsis;
+							    overflow: hidden;
+							    width: 3rem;
+							    margin-right: 0.3rem;
+						        text-align: center;
+						        color: grey;
+							}
+							img{
+								width: 3rem;
+							    height: 4.6rem;
+							}
 						}
 					}
-				}
-			} 
+				} 
+			}
+
+			
+			.return-top{
+			    position: fixed;
+			    bottom: 3rem;
+			    right: 1rem;
+			    background: lightskyblue;
+			    color: #fff;
+			    border-radius: 50%;
+			    p{
+		    	    font-size: 0.7rem;
+				    width: 2rem;
+				    height: 2rem;
+				    text-align: center;
+				    padding: 0.3rem;
+			    }
+			}
 		}
 
-		
-		.return-top{
+		.actorsMask{
 		    position: fixed;
-		    bottom: 3rem;
-		    right: 1rem;
-		    background: lightskyblue;
-		    color: #fff;
-		    border-radius: 50%;
-		    p{
-	    	    font-size: 0.7rem;
-			    width: 2rem;
-			    height: 2rem;
-			    text-align: center;
-			    padding: 0.3rem;
-		    }
+		    top: 0;
+		    left: 0;
+		    bottom: 0;
+		    right: 0;
+		    margin: auto;
+		    background: #333;
+		    z-index: 3;
+		    opacity: 0.8;
 		}
-	}
 
-	.actorsMask{
-	    position: fixed;
-	    top: 0;
-	    left: 0;
-	    bottom: 0;
-	    right: 0;
-	    margin: auto;
-	    background: #333;
-	    z-index: 3;
-	    opacity: 0.8;
-	}
-
-	.fade-enter-active,.fade-leave-active{
-		transform:translateY(0);
-		transition: all 0.3s;
-	}
-	.fade-enter,.fade-leave-active{
-		transform:translateY(100%)
+		.fade-enter-active,.fade-leave-active{
+			transform:translateY(0);
+			transition: all 0.3s;
+		}
+		.fade-enter,.fade-leave-active{
+			transform:translateY(100%)
+		}
 	}
 </style>

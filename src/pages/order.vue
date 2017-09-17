@@ -46,9 +46,9 @@
 			<h2 @click="showMessage2">确认支付￥{{datas.data.price}}</h2>
 		</div>
 
-		<div class="mask" v-show="modalShow">
+		<div class="mask" v-show="showAlert">
 			<div class="modal">
-				<p>手机号输入有误</p>
+				<p>{{ alertText }}</p>
 				<p @click="confirmBtn">确认</p>
 			</div>
 		</div>
@@ -61,7 +61,6 @@
 			return{
 				phoneNumber:'',
 				phoneClosed: false,
-				modalShow: false,
 				showAlert: false,
 				alertText: null,
 				countNum: 900 //900s，15分钟
@@ -111,30 +110,30 @@
 				clearInterval(this.timer);
 				this.timer = setInterval(()=>{
 					this.countNum--;
-					// if(this.countNum == 0){
-					// 	clearInterval(this.timer);
-					// 	//弹窗后，点击确认会跳回到首页
-					// 	alert("你未在15分钟内完成支付,很抱歉,你的座位已经取消  确认?")
-
-						// this.showAlert = true;
-						// this.alertText = '支付超时';
-					// }
+					if(this.countNum == 0){
+						clearInterval(this.timer);
+						//弹窗后，点击确认会跳回到首页
+						this.showAlert = true;
+						this.alertText = '你未在15分钟内完成支付,很抱歉,你的座位已经取消';
+						this.$router.push('/home')
+					}
 				}, 1000);
 			},
 			showMessage2(){	
 				if(this.phoneNumber==''){
-					console.log(this.modalShow)
-					this.modalShow = true;
+					this.alertText = '手机号输入有误';
+					this.showAlert = true;
 				}else{
 					if(!(/^1[34578]\d{9}$/.test(this.phoneNumber))){
-						this.modalShow = true;
+						this.alertText = '手机号输入有误';
+						this.showAlert = true;
 					}else{
 						showMessage('购票请下载豆瓣电影官方app~')
 					}
 				}	
 			},
 			confirmBtn(){
-				this.modalShow = false;
+				this.showAlert = false;
 			},
 			closeBtn(){
 				this.phoneNumber = '';
