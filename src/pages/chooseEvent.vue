@@ -19,14 +19,16 @@
 			
 		</div>
 		<div class="selected-movie">
-			<div class="movie-title">
-				<h1>{{ datas.movie_name }}</h1>
-				<star :size="24" :score="datas.rating_average" style="padding:0.3rem;display: inline-block;margin-left: -0.2rem;"></star>
-				<span>{{ datas.ratings_count }} 评分</span>
-			</div>
-			<div class="arrow">
-				<img src="../assets/向下.png" alt="">
-			</div>
+			<router-link :to="{name:'details',params:{ id: datas.id }}">
+				<div class="movie-title">
+					<h1>{{ datas.movie_name }}</h1>
+					<star :size="24" :score="datas.rating_average" style="padding:0.3rem;display: inline-block;margin-left: -0.2rem;"></star>
+					<span>{{ datas.ratings_count }} 评分</span>
+				</div>
+				<div class="arrow">
+					<img src="../assets/向下.png" alt="">
+				</div>
+			</router-link>
 		</div>
 		<div class="choose-event">
 			<div class="choose-date">
@@ -207,10 +209,10 @@
 		    .movie-title{
 		    	display:inline-block;
 		    	h1{
-		    		font-size: 1rem;
+		    		font-size: 0.8rem;
 		    	}	
 		    	span{
-	    		    font-size: 0.8rem;
+	    		    font-size: 0.7rem;
     				color: #ccc;
 		    	}
 		    }
@@ -225,6 +227,10 @@
 
 				    vertical-align: middle;
 			    }
+		    }
+		    a{
+		    	display: block;
+		    	color: #000;
 		    }
 		    
 		}
@@ -309,7 +315,7 @@
 		.swiper-slide-active{
 		    transform: scale(1.1);
 	   		border: 2px solid #fff;
-		    width: 5rem;
+		    width: 4.8rem;
 	    	margin-right: 20px;
 			img{
 				width: 5.3rem;

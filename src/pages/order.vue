@@ -28,7 +28,7 @@
 					<div v-else>
 						<h3 style="display:inline-block;">手机号：{{datas.data.phoneNumber}}</h3>
 					</div>
-					<img v-show="phoneClosed" src="../assets/关闭(黑).png" alt="">
+					<img v-show="phoneClosed" src="../assets/关闭(黑).png" alt="" @click="closeBtn">
 				</div>
 				<div class="order-price">
 					<h3>票价：<span>{{datas.data.price}}元</span></h3>
@@ -45,6 +45,13 @@
 		<div class="pay-confirm">
 			<h2 @click="showMessage2">确认支付￥{{datas.data.price}}</h2>
 		</div>
+
+		<div class="mask" v-show="modalShow">
+			<div class="modal">
+				<p>手机号输入有误</p>
+				<p @click="confirmBtn">确认</p>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
@@ -54,6 +61,7 @@
 			return{
 				phoneNumber:'',
 				phoneClosed: false,
+				modalShow: false,
 				showAlert: false,
 				alertText: null,
 				countNum: 900 //900s，15分钟
@@ -115,11 +123,21 @@
 			},
 			showMessage2(){	
 				if(this.phoneNumber==''){
-					alert('手机号输入有误')
+					console.log(this.modalShow)
+					this.modalShow = true;
 				}else{
-					showMessage('购票请下载豆瓣电影官方app~')
-				}
-				
+					if(!(/^1[34578]\d{9}$/.test(this.phoneNumber))){
+						this.modalShow = true;
+					}else{
+						showMessage('购票请下载豆瓣电影官方app~')
+					}
+				}	
+			},
+			confirmBtn(){
+				this.modalShow = false;
+			},
+			closeBtn(){
+				this.phoneNumber = '';
 			}
 		},
 		watch:{ //需求是对手机号进行监听，有数字就显示关闭按钮，没有就隐藏关闭按钮。  这里注意了，关闭按钮也要watch，否则无法在监听手机号输入的时候，对phoneClosed进行改变
@@ -284,6 +302,36 @@
 			    left: 50%;
 			    transform: translate(-50%,-50%);
 			}
+		}
+
+		.mask{
+			position: fixed;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 30;
+		    background: rgba(55,55,55,0.6);
+		}
+
+		.modal{
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    margin: auto;
+		    background: #fff;
+		    width: 8rem;
+		    height: 3rem;
+		    font-size: 16px;
+		    border-radius: 4px;
+		    padding: 0.5rem 0.8rem;
+		    p:last-child{
+	    		text-align: right;
+			    color: steelblue;
+			    margin-top: 1rem;
+		    }
 		}
 	}
 </style>

@@ -34,7 +34,7 @@
 				</div>
 				<div class="btns">
 					<button @click="op(1)">取消</button>
-					<button @click="op(2)">确定</button>				
+					<button @click="op(2)">确定</button>	
 				</div>
 			</div>
 		</div>

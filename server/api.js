@@ -4,6 +4,7 @@ var interfake = new Interfake();
 // 显示电影A在某日期，电影院列表
 interfake.get('/cinemaList?movie_id=11502973&date=0826').status(200).body({
 	"count":10,
+	"movie_name":"星际特工：千星之城",
     "data":[
 	    {
 	    	"cinema_id":1,
@@ -184,6 +185,7 @@ interfake.get('/cinemaList?movie_id=11502973&date=0827').body({
 */
 interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0826').status(200).body({
 	"count": 5,
+	"id":11502973,
 	"cinema_name":"橙天嘉禾广州影城",
 	"movie_name":"星际特工：千星之城",
 	"ratings_count": 55822,
@@ -234,6 +236,7 @@ interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0826').status(200).
 
 interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0827').status(200).body({
 	"count": 7,
+	"id":11502973,
 	"cinema_name":"橙天嘉禾广州影城",
 	"movie_name":"星际特工：千星之城",
 	"ratings_count": 55822,
