@@ -91,6 +91,7 @@ interfake.get('/cinemaList?movie_id=11502973&date=0826').status(200).body({
 
 interfake.get('/cinemaList?movie_id=11502973&date=0827').body({
 	"count":10,
+	"movie_name":"星际特工：千星之城",
     "data":[
     	{
 	    	"cinema_id":2,
@@ -183,7 +184,8 @@ interfake.get('/cinemaList?movie_id=11502973&date=0827').body({
 */
 interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0826').status(200).body({
 	"count": 5,
-	"name":"橙天嘉禾广州影城",
+	"cinema_name":"橙天嘉禾广州影城",
+	"movie_name":"星际特工：千星之城",
 	"ratings_count": 55822,
 	"rating_average": 7.2,
 	"data":[
@@ -232,7 +234,8 @@ interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0826').status(200).
 
 interfake.get('/eventList?movie_id=11502973&cinema_id=1&date=0827').status(200).body({
 	"count": 7,
-	"name":"橙天嘉禾广州影城",
+	"cinema_name":"橙天嘉禾广州影城",
+	"movie_name":"星际特工：千星之城",
 	"ratings_count": 55822,
 	"rating_average": 7.2,
 	"data":[

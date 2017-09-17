@@ -2,11 +2,11 @@
 	<div class="choose-event-box">
 		<div class="choose-header">
 			<img src="../assets/登录返回.png" alt="" class="back" @click="back">
-			<h3>{{ datas.name }}</h3>
+			<h3>{{ datas.cinema_name }}</h3>
 			<img class="image" src="../assets/搜索.png" alt="">
 		</div>
 		<div class="post-list">
-		 <swiper :options="swiperOption" style="padding:0.4rem 0">
+		 <swiper :options="swiperOption3" style="padding:0.4rem 0">
 	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2496088130.jpg" alt=""></swiper-slide>
 	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2492869476.jpg" alt=""></swiper-slide>
 	        <swiper-slide><img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2494135894.jpg" alt=""></swiper-slide>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="selected-movie">
 			<div class="movie-title">
-				<h1>星际特工：千星之城</h1>
+				<h1>{{ datas.movie_name }}</h1>
 				<star :size="24" :score="datas.rating_average" style="padding:0.3rem;display: inline-block;margin-left: -0.2rem;"></star>
 				<span>{{ datas.ratings_count }} 评分</span>
 			</div>
@@ -38,8 +38,8 @@
 			</div>
 			<div class="event-list">
 				<ul>
-					<li v-for="item in datas.data">
-						<router-link :to="{name:'order',params:{id:2}}">
+					<li v-for="item in datas.data" @click="jump(item)">
+						<router-link :to="{name:'order',params:{id:2,name:this.name}}">
 							<h3>{{ item.time }}</h3>
 							<span>{{ item.type }} </span>
 							<span>{{ item.movie_screen }}</span>
@@ -53,7 +53,8 @@
 	</div>
 </template>
 <script>
-	import { swiper,swiperSlide } from 'vue-awesome-swiper'
+	import { swiper,swiperSlide,swiperPlugins } from 'vue-awesome-swiper'
+	import {  } from 'vue-awesome-swiper'
 	import axios from 'axios'
 	import star from '@/components/star/star'
 	export default{
@@ -63,18 +64,30 @@
 						'08.28周一(后天)','08.29周二',
 						'08.30周三','08.31周四'],
 				type:'',
-				swiperOption: {
+				swiperOption3: {
 		          //pagination: '.swiper-pagination', //底部小圆点
 		          slidesPerView: 3, //slider容器能够同时显示的slides数量
 		          centeredSlides: true, //活动块会居中，而不是默认状态下的居左
 		          //paginationClickable: true, //小圆点可以点击
 		          //spaceBetween: 90 //slider间隔
-		        }
+		        },
+		        name:'',
+		        cinema_date:''
 			}
 		},
 		created(){
 			this.init();
-			console.log()
+			const that = this;
+			swiperPlugins.debugger = function swiperCallback(swiper){
+				return{
+					onSlideChangeStart(){ 
+
+					},
+					onSlideChangeEnd(){
+						// this.$store.dispatch('eventAsync',param);
+					}
+				}
+			}
 		},
 		computed:{
 			datas(){
@@ -92,17 +105,26 @@
 				this.$router.go(-1)
 			},
 			init(){
+				this.cinema_date = this.dateList[0];
+				this.$store.state.orderInfo.cinema_name = this.datas.cinema_name
+				this.$store.state.orderInfo.movie_name = this.datas.movie_name
 				let param = {};
 				param.id = this.$route.params.id;
 				param.date = '0826'
 				this.$store.dispatch('eventAsync',param);
 			},
 			chooseDate(item,index){
+				this.cinema_date = item;
 				this.type = index;
 				let param = {};
 				param.id = this.$route.params.id;
 				param.date = item.replace('.','').substr(0,4);
 				this.$store.dispatch('eventAsync',param);
+			},
+			jump(item){
+				this.$store.state.orderInfo.cinema_date = this.cinema_date.replace('周',' 周').replace('.','-').substr(0,8);
+				this.$store.state.orderInfo.data = item;
+				console.log(this.$store.state.orderInfo)
 			}
 		}
 	}
@@ -275,32 +297,33 @@
 			color:blue;
 			border-bottom:1.5px solid blue;
 		}
-	}
-
-	.swiper-wrapper{
-		padding: 0.4rem 0px;
-	}
-	.swiper-slide {
-	    img {
-			width:4rem;
-			height:6rem;
-	    }
-	}
-	.swiper-slide-active{
-	    transform: scale(1.1);
-   		border: 2px solid #fff;
-	    width: 5rem;
-    	margin-right: 20px;
-		img{
-			width: 5.3rem;
-			height: 7rem;
-		    vertical-align: middle;
+		.swiper-wrapper{
+			padding: 0.4rem 0px;
+		}
+		.swiper-slide {
+		    img {
+				width:4rem;
+				height:6rem;
+		    }
+		}
+		.swiper-slide-active{
+		    transform: scale(1.1);
+	   		border: 2px solid #fff;
+		    width: 5rem;
+	    	margin-right: 20px;
+			img{
+				width: 5.3rem;
+				height: 7rem;
+			    vertical-align: middle;
+			}
+		}
+		.swiper-slide .swiper-slide-prev,
+		.swiper-slide .swiper-slide-next{
+		        transform-origin: bottom center;
+	    		transform: scale(0.88);
 		}
 	}
-	.swiper-slide .swiper-slide-prev,
-	.swiper-slide .swiper-slide-next{
-	        transform-origin: bottom center;
-    		transform: scale(0.88);
-	}
+
+	
 
 </style>

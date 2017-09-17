@@ -4,7 +4,7 @@
 			<img src="../assets/start.jpg" alt="">
 			<div class="start-text">
 				<div class="start-img">
-					<img src="../assets/start2.jpg" alt="">					
+					<img src="../assets/start2.jpg" alt="">		
 				</div>
 				<span class="start-btn" @click="jump">跳过 {{ this.num }}</span>
 			</div>

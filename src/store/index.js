@@ -47,6 +47,16 @@ const state = {
 	five:{datas:[],start:200,scrollY:0},
 	mockList:[],
 	eventList:[],
+	orderInfo:{
+		order_id:'297100100',
+		movie_name:'',
+		cinema_name:'',
+		cinema_date:'',
+		seat:'8排05座',
+		phoneNumber:'',
+		data:null
+	},
+	order:[]
 };
 
 

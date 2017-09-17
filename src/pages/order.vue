@@ -1,31 +1,37 @@
 <template>
-	<div class="order-box">
+	<div class="order-box" v-if="datas.data!=null">
 		<div class="choose-header">
 			<img src="../assets/登录返回.png" alt="" class="back" @click="back">
-			<h3>电影票:变形金刚5：最后的骑士</h3>
+			<h3>电影票:{{ datas.movie_name }}</h3>
 			<img class="image" src="../assets/搜索.png" alt="">
 		</div>
 		<div class="order-main">
 			<div class="order-deadline">
-				<!-- <span>请在14分52秒内完成支付</span> -->
 				<span>请在{{remaining}}内完成支付</span>
 			</div>
 			<div class="order-details">
 				<div class="movie-info">
-					<h1>变形金刚5：最后的骑士<span>(原声3D)</span></h1>
-					<p>订单号:297100100</p>
+					<h1>{{datas.movie_name}}<span>({{datas.data.type}}{{datas.data.movie_screen}})</span>
+					</h1>
+					<p>订单号:{{datas.order_id}}</p>
 				</div>
 				<div class="cinema-info">
-					<h3>影院：橙天嘉禾广州影城</h3>
-					<h3>场次：2017-07-01 周六 13：20</h3>
+					<h3>影院：{{datas.cinema_name}}</h3>
+					<h3>场次：2017-{{datas.cinema_date}} {{datas.data.time}}</h3>
 					<h3 class="seat">座位：8排05座</h3>
 				</div>
-				<div class="photo-info">
-					<h3>手机号：13766666101</h3>
-					<img src="../assets/关闭(黑).png" alt="">
+				<div class="phone-info">
+					<h3 v-if="datas.data.phoneNumber==null">
+						<!-- 手机号：<input type="text" placeholder="请填写手机号" v-model="inputNum"> -->
+						手机号：<input type="number" placeholder="请填写手机号" v-model.number="phoneNumber">
+					</h3>
+					<div v-else>
+						<h3 style="display:inline-block;">手机号：{{datas.data.phoneNumber}}</h3>
+					</div>
+					<img v-show="phoneClosed" src="../assets/关闭(黑).png" alt="">
 				</div>
 				<div class="order-price">
-					<h3>票价：<span>44.5元</span></h3>
+					<h3>票价：<span>{{datas.data.price}}元</span></h3>
 					<p><img src="../assets/wechat.png" alt="">微信支付</p>
 					<p><img src="../assets/pay.png" alt="">支付宝支付</p>
 				</div>
@@ -37,14 +43,17 @@
 			</div>
 		</div>
 		<div class="pay-confirm">
-			<h2>确认支付￥44.5</h2>
+			<h2 @click="showMessage2">确认支付￥{{datas.data.price}}</h2>
 		</div>
 	</div>
 </template>
 <script>
+	import showMessage from '@/config/test'
 	export default{
 		data(){
 			return{
+				phoneNumber:'',
+				phoneClosed: false,
 				showAlert: false,
 				alertText: null,
 				countNum: 900 //900s，15分钟
@@ -56,7 +65,24 @@
 		beforeDestory(){
 			clearInterval(this.timer);
 		},
+		created(){
+			//假如没有电影信息，跳转到首页(防止页面刷新后报错)
+			if(this.$store.state.orderInfo.data==null){
+				this.$router.push('/home')
+			}
+		},
 		computed:{
+			datas(){
+				return this.$store.state.orderInfo;
+			},
+			// inputNum:{
+			// 	get(){
+			// 		return this.phoneNumber;
+			// 	},
+			// 	set(newValue){
+			// 		this.phoneNumber = newValue.replace(/[^\d]/g,'');
+			// 	}
+			// },
 			remaining(){
 				let min = parseInt(this.countNum / 60); //900s/60s = 15min
 				if(min < 10){
@@ -79,12 +105,42 @@
 					this.countNum--;
 					// if(this.countNum == 0){
 					// 	clearInterval(this.timer);
-					// 	this.showAlert = true;
-					// 	this.alertText = '支付超时';
+					// 	//弹窗后，点击确认会跳回到首页
+					// 	alert("你未在15分钟内完成支付,很抱歉,你的座位已经取消  确认?")
+
+						// this.showAlert = true;
+						// this.alertText = '支付超时';
 					// }
 				}, 1000);
+			},
+			showMessage2(){	
+				if(this.phoneNumber==''){
+					alert('手机号输入有误')
+				}else{
+					showMessage('购票请下载豆瓣电影官方app~')
+				}
+				
 			}
-		}
+		},
+		watch:{ //需求是对手机号进行监听，有数字就显示关闭按钮，没有就隐藏关闭按钮。  这里注意了，关闭按钮也要watch，否则无法在监听手机号输入的时候，对phoneClosed进行改变
+			phoneNumber:{
+				handler(){
+					if(this.phoneNumber!=null){
+						this.phoneClosed = true
+					}
+					if(this.phoneNumber==''){
+						this.phoneClosed = false
+					}
+				},
+				deep:true
+			},
+			phoneClosed:{ 
+				handler(){
+
+				},
+				deep: true
+			}
+		}	
 	}
 </script>
 <style lang="scss" rel="stylesheet/scss">
@@ -159,7 +215,7 @@
 					    margin-bottom: 0;
 				    }
 				}
-				.photo-info{
+				.phone-info{
 					padding: 0 0 1rem;
 				    display: flex;
 				    flex-direction: row;
@@ -173,6 +229,15 @@
 				    }
 				    img{
 			    	    width: 0.6rem;
+				    }
+				    input[type=number]{
+				    	width: 6rem;
+			    	    border: 0;
+					    line-height: 1rem;
+					    outline: none;
+					    display: inline-block;
+					    margin-top: -3rem;
+					    font-size: 16px;
 				    }
 				}
 			}
@@ -190,6 +255,9 @@
 				    vertical-align: middle;
 				    display: inline-block;
 	   				margin-right: 1rem;
+				}
+				span{
+				    color: orangered;
 				}
 			}
 			.order-tips{

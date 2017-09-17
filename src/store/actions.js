@@ -172,6 +172,8 @@ export const mockAsync = ({
 		commit('mockDatas',{
 			datas: res.data,
 		})
+	}).catch((error)=>{
+		alert('获取数据失败，你可能还没有开启api服务器哦~')
 	})
 
 }

@@ -16,7 +16,7 @@
 			<h3>上映此片的全部影院</h3>
 			<ul>
 				<li v-for="item in datas.data">
-					<router-link :to="{name:'chooseEvent',params:{id:item.cinema_id}}">
+					<router-link :to="{name:'chooseEvent',params:{id:item.cinema_id,name:item.name}}">
 						<p>{{item.name}}</p>
 						<span>{{item.price}}元起</span>
 						<div class="info">

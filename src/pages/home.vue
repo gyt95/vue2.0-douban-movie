@@ -2,7 +2,7 @@
 	<div>
 		<!-- 搜索模块 -->
 		<div class="search-box">
-			<router-link to="/city" class="city-text">
+			<router-link to="/home" class="city-text">
 				<span v-text="cityText"></span>
 				<img src="../assets/向下.png" alt="" style="width: 0.5rem;">
 			</router-link>
@@ -66,6 +66,7 @@
 
 	import { mapState } from 'vuex'
 	import { test } from '@/config/utils'
+
 	const TAB_NAME = ['正在热映', '即将上映']
 
 	export default{
