@@ -202,6 +202,7 @@
 		created(){
 			this.$store.dispatch('detailsAsync',this.id)
 			for(let i=0;i<this.wantTo.length;i++){
+				console.log(999)
 				if(this.wantTo[i].id==this.id && fetch('userInfo')){
 					this.color='clicked';
 					this.wanted="已想看";

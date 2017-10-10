@@ -107,8 +107,12 @@
 			star
 		},
 		created(){
-			this.sum_want = JSON.parse(fetch('wantTo'));
-			this.sum_ever = JSON.parse(fetch('ever'));
+			if(fetch('wantTo')){
+				this.sum_want = JSON.parse(fetch('wantTo'));
+			}
+			if(fetch('ever')){
+				this.sum_ever = JSON.parse(fetch('ever'));
+			}
 			if(this.type == 'want'){
 				//记得要用JSON.parse，否则就是一堆无法显示的JSON格式的数据
 				this.want = JSON.parse(fetch('wantTo'))

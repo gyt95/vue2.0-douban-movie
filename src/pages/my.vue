@@ -75,13 +75,15 @@
 			vRecord
 		},
 		mounted(){
-			if(fetch('userInfo')){
+			if(fetch('userInfo')){ //如果保存有账户密码，先判断是否登录过
 				this.userInfo = JSON.parse(fetch('userInfo'));
-				if(this.userInfo != null){
+				if(this.userInfo){
 					this.login = true;
 					this.name = this.userInfo.username;
 					this.bg = 'bg';
 				}
+			}else{
+				console.log("??")
 			}
 			//搞了半天都返回的是json字符串，一直获取不到username，后来想起来要用JSON.parse...
 			// let userInfo = fetch('userInfo');

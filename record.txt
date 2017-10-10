@@ -112,3 +112,10 @@ README.md增加项目结构介绍
 
 9.26
 find.vue跟随官方App进行改版，删掉无用的内容
+
+10.10
+my.vue、details.vue、record.vue报错：
+[Vue warn]: Error in render function: "TypeError: Cannot read property 'length' of null"
+
+
+修复movieInfo.vue不能全屏弹窗bug
